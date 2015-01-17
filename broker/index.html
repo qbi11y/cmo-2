@@ -1,0 +1,27 @@
+<html lang="en" ng-app="CloudMatrix">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../packages/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/stylesheets/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script type="text/javascript" src="../../packages/angular/angular.min.js"></script> <!-- main angular file -->
+    <script src="../../packages/angular-route/angular-route.js"></script><!-- angular route module -->
+    <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script><!-- Firebase -->
+    <script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script><!-- AngularFire -->
+    <script type="text/javascript" src="../js/broker-controllers.js"></script><!-- custom angular controllers -->
+
+    <div class="container">
+
+    <!-- All of the views for the store are loaded into this div -->
+        <div ng-view></div> 
+    </div> 
+    
+    <script type="text/javascript" src="../../packages/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../../packages/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/broker-routing-scripts.js"></script>
+    <script type="text/javascript" src="../js/broker-data.js"></script>
+</body>
+</html>

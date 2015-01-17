@@ -1,0 +1,12 @@
+<form role="form">
+    <div class="form-group">
+        <label for="mt-name">Account Name</label>
+        <input type="text" class="form-control" id="mt-name" placeholder="Enter account name" ng-model="tenantForm.accountName">
+    </div>
+
+    <div class="form-group">
+        <a href="#/create-tenant-summary" class="btn btn-primary btn-block" ng-click="setTenant()">Next</a>
+    </div>
+    {{ tenantForm }}
+</form>
+

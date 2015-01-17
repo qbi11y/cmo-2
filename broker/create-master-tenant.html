@@ -1,0 +1,23 @@
+test {{ masterTenantForm }}
+<form role="form">
+    <div class="form-group">
+        <label for="mt-name">Account Name</label>
+        <input type="text" class="form-control" id="mt-name" placeholder="Enter account name" ng-model="masterTenantForm.accountName">
+    </div>
+
+    <div class="form-group">
+        <label for="mt-max-tenants">Max Tenants</label>
+        <input type="number" class="form-control" id="mt-max-tenants" placeholder="Enter number of max tenants" ng-model="masterTenantForm.maxTenants">
+    </div>
+
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="masterTenantForm.defaultCatalog"> Include default catalog
+        </label>
+    </div>
+
+    {{ masterTenantForm }}
+    <div class="form-group">
+        <a href="#/create-master-tenant-summary" class="btn btn-primary btn-block" ng-click="setMasterTenant()">Next</a>
+    </div>
+</form>
