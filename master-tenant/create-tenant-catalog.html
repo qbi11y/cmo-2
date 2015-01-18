@@ -1,0 +1,26 @@
+<form role="form">
+    <div class="form-group">
+        <label for="mt-name">Account Name</label>
+        <input type="text" class="form-control" id="mt-name" placeholder="Enter account name" ng-model="tenantForm.accountName">
+    </div>
+
+    <div class="form-group">
+        <label for="mt-name">More Info</label>
+        <input type="text" class="form-control" id="mt-moreInfo" placeholder="Enter account name" ng-model="tenantForm.moreInfo">
+    </div>
+
+    <div class="form-group">
+        <label for="mt-name">More Stuff</label>
+        <input type="text" class="form-control" id="mt-moreStuff" placeholder="Enter account name" ng-model="tenantForm.moreStuff">
+    </div>
+    <div class="form-group">
+        <label for="mt-name">Last</label>
+        <input type="text" class="form-control" id="mt-moreStuff" placeholder="Enter account name" ng-model="tenantForm.last">
+    </div>
+
+    <div class="form-group">
+        <a href="#/create-tenant-summary" class="btn btn-primary btn-block" ng-click="setTenant()">Next</a>
+    </div>
+    {{ tenantForm }}
+</form>
+

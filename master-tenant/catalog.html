@@ -1,0 +1,10 @@
+<div>Welcome to the master tenant Catalog {{ catalog }}</div>
+<div><a href="#/create-tenant/{{currentMasterTenant}}">Create Tenant</a></div>
+<div><a href="#/catalog/{{currentMasterTenant}}">Manage Catalog</a></div>
+
+<div ng-repeat="service in catalog.services | filter: searchText">
+    <div><img ng-src="{{service.icon}}"></div>
+    <div>{{ service.name }}</div>
+    <div>{{ service.description }}</div>
+</div>
+

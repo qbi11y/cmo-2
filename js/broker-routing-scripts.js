@@ -18,6 +18,11 @@ app.config(['$routeProvider', function($routeProvider){
         controller: 'BrokerController'
     })
 
+    .when('/catalog', {
+        templateUrl: 'catalog.html',
+        controller: 'CatalogController'
+    })
+
     //default route takes you to the store
     .otherwise({
         redirectTo: '/'

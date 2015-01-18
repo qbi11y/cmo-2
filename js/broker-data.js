@@ -16,9 +16,9 @@ app.factory('MasterTenant', ['$firebase', function($firebase) {
         createMasterTenant: function(data) {            
             console.log('create', data);
             var fb = new Firebase('https://cmo-master-tenants.firebaseio.com/');
-            var newFB = fb.child(data[0].id);
-            var path = newFB.toString();
-            var sync = $firebase(newFB);
+            var mt = fb.child(data[0].id);
+            var mt_info = mt.child('info');
+            var sync = $firebase(mt_info);
             var syncObject = sync.$asArray();
             syncObject.$add(data);
 

@@ -1,0 +1,13 @@
+Catalog Stuff Here
+<div><a href="#create-master-tenant">Create Master Tenant</a></div>
+<div><a href="#catalog">Manage Default Catalog</a></div>
+<div>
+    <form>
+        <input type="search" class="form-control" placeholder="Search Services" ng-model="searchText">
+    </form>
+</div>
+<div ng-repeat="service in services | filter: searchText" ng-click="showDetails(service)">
+    <div><img ng-src="{{service.icon}}"></div>
+    <div>{{ service.name }}</div>
+    <div>{{ service.description }}</div>
+</div>

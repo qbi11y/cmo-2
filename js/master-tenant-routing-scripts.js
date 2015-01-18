@@ -8,14 +8,24 @@ app.config(['$routeProvider', function($routeProvider){
         controller: 'MasterTenantController'
     })
 
-    .when('/create-tenant', {
+    .when('/create-tenant/:id', {
         templateUrl: 'create-tenant.html',
+        controller: 'TenantController'
+    })
+
+    .when('/create-tenant-catalog/:id', {
+        templateUrl: 'create-tenant-catalog.html',
         controller: 'TenantController'
     })
 
     .when('/create-tenant-summary', {
         templateUrl: 'create-tenant-summary.html',
         controller: 'TenantController'
+    })
+
+    .when('/catalog/:id', {
+        templateUrl: 'catalog.html',
+        controller: 'CatalogController'
     })
 }]);
 

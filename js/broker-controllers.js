@@ -1,5 +1,24 @@
 var ctrl = angular.module('BrokerControllers', ['Data']);
 
+ctrl.controller('CatalogController', ['$scope', '$http', function($scope, $http) {
+    $scope.providers = [];
+    $scope.services = [];
+    $http.get('catalog.php').success(function(data) {
+        console.log('php ', data);
+        for (var i=0; i < data.providers.length; i++) {
+            for (var n=0; n < data.services.length; n++) {
+                if (data.providers[i].id == data.services[n].providerID) {
+                    data.services[n].icon = data.providers[i].icon;
+                }
+            }
+        }
+        $scope.showDetails = function(id) {
+
+        }
+        $scope.services = data.services;
+    });
+}]);
+
 ctrl.controller('BrokerController', ['$scope', '$http', 'MasterTenant', function($scope, $http, MasterTenant) {
     $scope.masterTenantID = 23; 
     
@@ -10,6 +29,7 @@ ctrl.controller('BrokerController', ['$scope', '$http', 'MasterTenant', function
     */
 
     $scope.createMasterTenant = function() {
+        console.log('sending to mysql', MasterTenant.getMasterTenant());
         $http.post('uploadMasterTenant.php', MasterTenant.getMasterTenant())
 
         .success(function (data) {

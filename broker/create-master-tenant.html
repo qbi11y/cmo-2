@@ -12,7 +12,7 @@ test {{ masterTenantForm }}
 
     <div class="checkbox">
         <label>
-          <input type="checkbox" ng-model="masterTenantForm.defaultCatalog"> Include default catalog
+          <input type="checkbox" ng-model="masterTenantForm.defaultCatalog" ng-init="masterTenantForm.defaultCatalog = false"> Include default catalog
         </label>
     </div>
 

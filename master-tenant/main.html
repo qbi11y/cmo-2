@@ -1,3 +1,6 @@
 <div>Welcome to the master tenant {{ test }}</div>
-<div><a href="#/create-tenant">Create Tenant</a></div>
+<div><a href="#/create-tenant/{{currentMasterTenant}}">Create Tenant</a></div>
+<div><a href="#/catalog/{{currentMasterTenant}}">Manage Catalog</a></div>
+
+<div ng-include="'tenant-list.html'"></div>
 

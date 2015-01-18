@@ -9,6 +9,7 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 @$accountName = $request->accountName;
 @$maxTenants = $request->maxTenants;
+@$defaultCatalog = $request->defaultCatalog;
 
 
 $link = mysql_connect($hostname, $username, $password);
@@ -18,7 +19,7 @@ if (!$link) {
 
 mysql_select_db ($database) or die ('Cannot connect to the database: ' . mysql_error());
 
-mysql_query("INSERT INTO masterTenants (id, name, tenants) VALUES('', '".$accountName."', ".$maxTenants.")") or die ('Query is invalid: ' . mysql_error());
+mysql_query("INSERT INTO masterTenants (id, name, tenants, defaultCatalog) VALUES('', '".$accountName."',".$maxTenants.", '".$defaultCatalog."')") or die ('Query is invalid: ' . mysql_error());
 
 $query = mysql_query("SELECT * FROM masterTenants WHERE id='". mysql_insert_id() ."'");
 

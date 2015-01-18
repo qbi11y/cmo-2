@@ -1,0 +1,10 @@
+list {{ tenantList }}
+<div>
+    <form>
+        <input type="search" class="form-control" placeholder="Search Linked Tenants" ng-model="searchText">
+    </form>
+</div>
+<div ng-repeat="tenant in tenantList | filter: searchText">
+    <span>{{ tenant.accountName }}</span><span><a href="">Manage Catalog</a>
+</div>
+
