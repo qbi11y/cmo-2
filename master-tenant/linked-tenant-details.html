@@ -1,0 +1,20 @@
+<!-- TenantController -->
+<h3>Master Tenant Portal - Linked Tenant Details</h3>
+{{currentLinkedTenant}}
+<div>defaultCatalog: {{ defaultCatalog.services }}</div>
+<div>linkedTenantCatalog: {{ linkedTenantCatalog.services }}</div>
+Link: <a target="blank" href="http://localhost/cmo-2/linked-tenant/#/{{currentLinkedTenant.info.id}}">localhost/cmo-2/linked-tenant/#/{{currentLinkedTenant.info.id}}</a>
+<div>some details</div>
+<div>
+    {{defaultCatalog.services}}
+    <div ng-repeat="service in defaultCatalog.services">
+        <div><img ng-src="{{service.icon}}"></div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" class="form-control" ng-checked="service.visible" ng-model="selectedService" ng-init="selectedService = service.visible" ng-click="updateCatalog(service, selectedService)">{{ service.name }}
+            </label>
+        </div>
+    </div>
+
+    <a href="" class="btn btn-primary btn-block" ng-click="updateLinkedTenantCatalog()">Save Changes</a>
+</div>

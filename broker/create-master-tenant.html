@@ -1,5 +1,11 @@
+<!-- MasterTenantController broker-controllers.js -->
 test {{ masterTenantForm }}
 <form role="form">
+    <div class="form-group">
+        <label for="mt-accessCode">Access Code</label>
+        <input type="text" class="form-control" id="mt-accessCode" placeholder="Enter access code" ng-model="masterTenantForm.accessCode">
+    </div>
+
     <div class="form-group">
         <label for="mt-name">Account Name</label>
         <input type="text" class="form-control" id="mt-name" placeholder="Enter account name" ng-model="masterTenantForm.accountName">
@@ -18,6 +24,6 @@ test {{ masterTenantForm }}
 
     {{ masterTenantForm }}
     <div class="form-group">
-        <a href="#/create-master-tenant-summary" class="btn btn-primary btn-block" ng-click="setMasterTenant()">Next</a>
+        <a href="#/create-master-tenant-summary" class="btn btn-primary btn-block" ng-click="setNewMasterTenant()">Next</a>
     </div>
 </form>

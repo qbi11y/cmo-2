@@ -1,19 +1,55 @@
 var app = angular.module('Data', ['firebase']);
 
-app.factory('MasterTenant', ['$firebase', function($firebase) {
-    var masterTenant = {};
-    
-    
-    
+app.factory('Catalog', function() {
+    var catalog;
 
     return {
-        getMasterTenant:  function() {
-            return masterTenant
+        getCatalog: function() {
+            return catalog
         },
-        setMasterTenant: function(data) {
-            masterTenant = data;
+        setCatalog: function(data) {
+            catalog = data
+        }
+    }
+});
+
+app.factory('MasterTenantDetails', function() {
+    var details = {};
+
+    return {
+        getMasterTenantDetails: function() {
+            console.log('show details');
+            return details
         },
-        createMasterTenant: function(data) {            
+        setMasterTenantDetails: function(data) {
+            details = data
+        }
+    }
+});
+
+app.factory('MasterTenantList', function() {
+    var masterTenantList = [];
+    return {
+        getMasterTenantList: function() {
+            return masterTenantList
+        },
+        setMasterTenantList: function(data) {
+            masterTenantList = data
+        }
+    }
+});
+
+app.factory('NewMasterTenant', ['$firebase', function($firebase) {
+    var newMasterTenant = {};   
+
+    return {
+        getNewMasterTenant:  function() {
+            return newMasterTenant
+        },
+        setNewMasterTenant: function(data) {
+            newMasterTenant = data;
+        },
+        createNewMasterTenant: function(data) {            
             console.log('create', data);
             var fb = new Firebase('https://cmo-master-tenants.firebaseio.com/');
             var mt = fb.child(data[0].id);
@@ -25,3 +61,16 @@ app.factory('MasterTenant', ['$firebase', function($firebase) {
         }
     }
 }]);
+
+app.factory('NewServiceData', function() {
+    var newServiceData = {};
+
+    return {
+        getNewServiceData: function() {
+            return newServiceData
+        },
+        setNewServiceData: function(data) {
+            newServiceData = data
+        }
+    }
+})

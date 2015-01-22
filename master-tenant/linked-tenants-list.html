@@ -1,0 +1,16 @@
+<!-- Linked Tenants List Controller -->
+<h3>Master Tenant Portal - View Linked Tenants</h3>
+<div><a href="#/{{currentMasterTenant}}/create-tenant">Create Linked Tenant</a></div>
+
+{{ linkedTenantsList }}
+<div>
+    <form>
+        <input type="search" class="form-control" placeholder="Search Linked Tenants" ng-model="searchText">
+    </form>
+</div>
+
+<div ng-repeat="tenant in linkedTenantsList | filter: searchText">
+    <span><a href="#/{{currentMasterTenant}}/linked-tenant-details/{{tenant.id}}" ng-click="setLinkedTenant(tenant.id)">{{ tenant.name }}</a></span>
+</div>
+
+

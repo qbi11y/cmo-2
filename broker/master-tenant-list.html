@@ -1,0 +1,7 @@
+<!-- Master Tenant List Controller broker-controller.js-->
+<h3><a href="#/">Broker Portal</a> - View Master Tenants</h3>
+<div><a href="#create-master-tenant">Create Master Tenant</a></div>
+
+<div ng-repeat="mt in masterTenantList | filter: searchText">
+    <a href="http://localhost/cmo-2/broker/#/master-tenant-details/{{mt.id}}" ng-click="showMasterTenantDetails(mt)">{{mt.name}}</a>
+</div>

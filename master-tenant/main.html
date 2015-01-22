@@ -1,6 +1,20 @@
-<div>Welcome to the master tenant {{ test }}</div>
-<div><a href="#/create-tenant/{{currentMasterTenant}}">Create Tenant</a></div>
-<div><a href="#/catalog/{{currentMasterTenant}}">Manage Catalog</a></div>
-
-<div ng-include="'tenant-list.html'"></div>
-
+<h3>Master Tenant Admin Portal</h3>
+<div><a href="#/{{currentMasterTenant}}/linked-tenants-list">View Linked Tenants</a></div>
+<div>Customer Administration</div>
+<div>Ordering</div>
+<div>Billing</div>
+<div>View as Customer</div>
+<div>Monitoring</div>
+<div>Provider Account Management</div>
+<div>Pricing Rules</div>
+<div>Policy Management</div>
+<div>Budget Management</div>
+<div>Portal Notifications</div>
+<div>Platform Administration</div>
+<div><a href="#/{{currentMasterTenant}}/catalog">Manage Catalog</a></div>
+<ul>
+    <li>Add Provider</li>
+    <li>Add Service</li>
+    <li>Cloud Instance</li>
+    <li>Add Location</li>
+</ul>

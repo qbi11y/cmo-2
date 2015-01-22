@@ -7,7 +7,6 @@ $username="root";
 $password="root";
 $obj->id = 5;
 $masterTenants = array();
-//$id = 14;
 
 //DO NOT EDIT BELOW THIS LINE
 $link = mysql_connect($hostname, $username, $password);
@@ -19,11 +18,9 @@ mysql_select_db ($database) or die ('Cannot connect to the database: ' . mysql_e
 
 //$data = file_get_contents("php://input");
 //$objData = json_decode($data);
-$id = $_GET['masterTenantID'];
+//@$id = $objData->id;
 
-//echo 'what the heck is this';
-//echo "SELECT * FROM masterTenants WHERE id=".$id;
-$query = mysql_query("SELECT * from masterTenants WHERE id=".$id) or die ('Query is invalid: ' . mysql_error());
+$query = mysql_query("SELECT * from masterTenants") or die ('Query is invalid: ' . mysql_error());
 
 while ($row = mysql_fetch_array($query)) {
     $obj = new stdClass();

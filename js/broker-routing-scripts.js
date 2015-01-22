@@ -10,12 +10,12 @@ app.config(['$routeProvider', function($routeProvider){
 
     .when('/create-master-tenant', {
         templateUrl: 'create-master-tenant.html',
-        controller: 'BrokerController'
+        controller: 'CreateMasterTenantController'
     })
 
     .when('/create-master-tenant-summary', {
         templateUrl: 'create-master-tenant-summary.html',
-        controller: 'BrokerController'
+        controller: 'CreateMasterTenantController'
     })
 
     .when('/catalog', {
@@ -23,53 +23,28 @@ app.config(['$routeProvider', function($routeProvider){
         controller: 'CatalogController'
     })
 
+    .when('/catalog/add-service', {
+        templateUrl: 'catalog-add-service.html',
+        controller: 'AddServiceController'
+    })
+
+    .when('/catalog/add-service-summary', {
+        templateUrl: 'catalog-add-service-summary.html',
+        controller: 'AddServiceController'
+    })
+
+    .when('/master-tenant-list',  {
+        templateUrl: 'master-tenant-list.html',
+        controller: 'MasterTenantListController'
+    })
+
+    .when('/master-tenant-details/:masterTenantID', {
+        templateUrl: 'master-tenant-details.html',
+        controller: 'MasterTenantDetailsController'
+    })
+
     //default route takes you to the store
     .otherwise({
         redirectTo: '/'
     });
 }]);
-
-
-
-
-/*
-app.config(['$routeProvider', 
-    function($routeProvider) {
-    $routeProvider.when('/cmo/store', {
-        templateUrl: 'templates/store/main.html',
-        controller: 'ProductController'
-    }).when('/details', {
-        templateUrl: 'templates/store/details.html',
-        controller: 'ProductController'
-    }).when('/configure', {
-        templateUrl: 'templates/store/configure.html',
-        controller: 'ProductController'
-    }).when('/summary', {
-        templateUrl: 'templates/store/summary.html',
-        controller: 'ProductController'
-    }).when('/compare', {
-        templateUrl: 'templates/store/compare.html',
-        controller: 'ProductController'
-    }).when('/cmo/manage', {
-        templateUrl: 'templates/manage/main.html',
-        controller: 'ManageController'
-    }).when('/cmo/manage/details', {
-        templateUrl: 'templates/mange/details.html',
-        controller: 'ManageController'
-    }).when('/cmo/catalog', {
-        templateUrl: 'templates/catalog/main.html',
-        controller: 'CatalogController'
-    }).when('/details', {
-        templateUrl: 'templates/catalog/details.html',
-        controller: 'CatalogController'
-    }).when('/edit-product', {
-        templateUrl: 'templates/catalog/edit-product.html',
-        controller: 'CatalogController'
-    }).when('/add-product', {
-        templateUrl: 'templates/catalog/add-product.html',
-        controller: 'CatalogController'
-    }).otherwise({
-        redirectTo: '/cmo'
-    });
-}]);
-*/

@@ -1,0 +1,46 @@
+<!-- MasterTenantController broker-controllers.js -->
+<h3>Broker Portal - Add Service to Default Catalog</h3>
+<form role="form">
+    <div class="form-group">
+        <label for="provider">Provider</label>
+        <select class="form-control" ng-model="addServiceForm.provider" ng-init="addServiceForm.provider = -1">
+            <option selected value="-1">Select Provider</option>
+            <option ng-repeat="provider in providers" value="{{provider.id}}">{{ provider.name }}</option>
+            <option value="0">Add New Provider</option>
+        </select>
+    </div>
+
+    <!-- display only if user needs to add a provider -->
+    <div ng-show="addServiceForm.provider == 0">
+        <div class="form-group">
+            <label for="providerName">Provider Name</label>
+            <input type="text" class="form-control" placeholder="Enter providers name" ng-model="addServiceForm.addProvider.providerName">
+        </div>
+
+        <div class="form-group">
+            <label for="providerIcon">Path to Icon</label>
+            <input type="text" class="form-control" placeholder="Enter icon path" ng-model="addServiceForm.addProvider.icon">
+        </div>
+
+        <div class="form-group">
+            <label for="providerDescription">Provider Description</label>
+            <textarea class="form-control" ng-model="addServiceForm.addProvider.providerDescription"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="serviceName">Service Name</label>
+        <input type="text" class="form-control" placeholder="Enter service name" ng-model="addServiceForm.serviceName">
+    </div>
+
+    <div class="form-group">
+        <label for="serviceDescription">Service Description</label>
+        <textarea class="form-control" ng-model="addServiceForm.serviceDescription"></textarea>
+    </div>
+
+
+    {{ addServiceForm }}
+    <div class="form-group">
+        <a href="#/catalog/add-service-summary" class="btn btn-primary btn-block" ng-click="setNewServiceData(addServiceForm)">Next</a>
+    </div>
+</form>

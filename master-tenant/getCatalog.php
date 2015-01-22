@@ -20,7 +20,7 @@ mysql_select_db ($database) or die ('Cannot connect to the database: ' . mysql_e
 //$objData = json_decode($data);
 //@$id = $objData->id;
 
-$id = $_GET['id'];
+$id = $_GET['masterTenantID'];
 
 $provider_query = mysql_query("SELECT * from providers") or die ('Query is invalid: ' . mysql_error());
 $services_query = mysql_query("SELECT * from services") or die ('Query is invalid: ' . mysql_error());

@@ -1,23 +1,22 @@
-testing {{ mt }}
+testing {{ newMasterTenantInfo }}
 <form role="form">
     <div class="form-group">
         <label for="mt-name">Account Name</label>
-        {{ mt.accountName }}
+        {{ newMasterTenantInfo.accountName }}
     </div>
 
     <div class="form-group">
         <label for="mt-max-tenants">Max Tenants</label>
-        {{ mt.maxTenants }}
+        {{ newMasterTenantInfo.maxTenants }}
     </div>
 
     <div class="checkbox">
         <label>
-          <input type="checkbox" ng-model="mt.defaultCatalog"> Include default catalog
+          <input type="checkbox" ng-model="newMasterTenantInfo.defaultCatalog"> Include default catalog
         </label>
     </div>
 
     <div class="form-group">
-        <button class="btn btn-primary btn-block" ng-click="createMasterTenant()">Create Master Tenant</a>
+        <a href="#/master-tenant-list" class="btn btn-primary btn-block" ng-click="createMasterTenant()">Create Master Tenant</a>
     </div>
-    Link: <a href="http://localhost/cmo-2/master-tenant/#/tenants/{{ masterTenantID }}">localhost/cmo-2/master-tenant/#/tenant/{{ masterTenantID }}</a>
 </form>

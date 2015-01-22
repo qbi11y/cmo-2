@@ -1,11 +1,12 @@
+<!-- Tenant Controller -->
 <form role="form">
     <div class="form-group">
         <label for="mt-name">Account Name</label>
-        {{ tenant }} {{ currentMasterTenant }}
+        tenant to create: {{ tenant }} {{ currentMasterTenant }}
     </div>
 
     <div class="form-group">
-        <a href="#/tenants/{{currentMasterTenant}}" class="btn btn-primary btn-block" ng-click="createTenant()">Create Tenant Account</a>
+        <a href="#/{{currentMasterTenant}}/tenants" class="btn btn-primary btn-block" ng-click="createTenant()">Create Tenant Account</a>
     </div>
     <!-- function to create to new tenant. NEED A function to call the current master tenant then push the new tenant onto that node -->
 </form>

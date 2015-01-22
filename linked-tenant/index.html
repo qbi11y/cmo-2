@@ -1,7 +1,7 @@
 <html lang="en" ng-app="CloudMatrix">
 <head>
     <meta charset="UTF-8">
-    <title>Master Tenant</title>
+    <title>Linked Tenant</title>
     <link rel="stylesheet" href="../../packages/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/stylesheets/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,16 +11,16 @@
     <script src="../../packages/angular-route/angular-route.js"></script><!-- angular route module -->
     <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script><!-- Firebase -->
     <script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script><!-- AngularFire -->
-    <script type="text/javascript" src="../js/master-tenant-controllers.js"></script><!-- custom angular controllers -->
+    <script type="text/javascript" src="../js/linked-tenant-controllers.js"></script><!-- custom angular controllers -->
 
-    <div class="container" ng-init="getTenantList()">
+    <div class="container">
     <!-- All of the views for the store are loaded into this div -->
         <div ng-view></div> 
     </div> 
     
     <script type="text/javascript" src="../../packages/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../../packages/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/master-tenant-routing-scripts.js"></script>
-    <script type="text/javascript" src="../js/master-tenant-data.js"></script>
+    <script type="text/javascript" src="../js/linked-tenant-routing-scripts.js"></script>
+    <script type="text/javascript" src="../js/linked-tenant-data.js"></script>
 </body>
 </html>
