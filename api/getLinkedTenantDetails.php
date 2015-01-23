@@ -34,6 +34,8 @@ while ($row = mysql_fetch_array($service_query)) {
     $service->providerID = $row['providerID'];
     $service->defaultCatalogID = $row['defaultCatalogID'];
     $service->serviceName = $row['serviceName'];
+    $service->points = $row['points'];
+    $service->startingPrice = $row['startingPrice'];
     $service->description = $row['description'];
     $service->icon = $row['icon'];
     array_push($services, $service);

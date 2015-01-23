@@ -80,6 +80,8 @@ ctrl.controller('AddServiceController', ['$scope', '$http', '$routeParams', 'New
     $scope.addServiceForm = {};
     $scope.newServiceData = NewServiceData.getNewServiceData();
     $scope.createNewDefaultCatalogService = function() {
+        console.log('new service data', NewServiceData.getNewServiceData());
+
         if (NewServiceData.getNewServiceData().addProvider) {
             $http.post('../api/createNewDefaultCatalogProvider.php', NewServiceData.getNewServiceData().addProvider).success(function (data) {
                 $scope.updateCatalog('provider',data);
@@ -97,6 +99,7 @@ ctrl.controller('AddServiceController', ['$scope', '$http', '$routeParams', 'New
                 $scope.updateCatalog('service', data);
             })
         }
+    
     };
 
     $scope.updateCatalog = function(type, data) {

@@ -1,0 +1,40 @@
+<!-- Tenant Controller -->
+<form role="form">
+    <div class="form-group">
+        <div class="radio">
+            <label>
+                <input type="radio" name="catalogAccess" value="all" ng-model="tenantForm.catalogAccess" ng-init="tenantForm.catalogAccess = 'all'" checked> Access to all providers and all services
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="catalogAccess" value="partial" ng-model="tenantForm.catalogAccess"> Access to select providers and select services
+            </label>
+        </div>
+        {{ tenantForm }}
+        default catalog {{ defaultCatalog.services }}
+        <div ng-show="tenantForm.catalogAccess == 'partial'">
+            <div ng-repeat="provider in defaultCatalog.providers">
+                <div class="checkbox">
+                    <input type="checkbox"> {{ provider.name }}
+                </div>
+                <div ng-repeat="service in defaultCatalog.services track by $index" ng-show="provider.id == service.providerID">
+                    <div class="checkbox">
+                        <input type="checkbox" ng-model="selectedService" ng-click="updateTenantCatalog(service, selectedService)" ng-init="checked"> {{ service.name }} 
+                        <div class="form-group" ng-show="selectedService">
+                        <label>Points</label>
+                        <input type="number" class="form-control" ng-model="tenantForm.points" placeholder="Enter number of reward points">
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ tenantCatalog }}
+    <div class="form-group">
+        <a href="#/{{currentMasterTenant}}/create-tenant-summary" class="btn btn-primary btn-block">Next</a>
+    </div>
+    
+</form>
+

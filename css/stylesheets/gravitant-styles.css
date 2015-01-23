@@ -1,0 +1,66 @@
+/* line 1, ../sass/gravitant-styles.scss */
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+/*styles for the list/grid views*/
+/* line 8, ../sass/gravitant-styles.scss */
+.phone-disabled {
+  display: none;
+}
+
+/* line 12, ../sass/gravitant-styles.scss */
+.list {
+  border-bottom: 1px dotted gray;
+  vertical-align: top;
+}
+
+/* line 17, ../sass/gravitant-styles.scss */
+.list-header {
+  font-size: 1.5em;
+}
+
+/* line 21, ../sass/gravitant-styles.scss */
+.list img {
+  max-width: 200px;
+}
+
+/* line 25, ../sass/gravitant-styles.scss */
+.list-logo {
+  min-height: 5em;
+}
+
+/* line 29, ../sass/gravitant-styles.scss */
+.list-text {
+  min-height: 5em;
+}
+
+/* end styles for list/grid view */
+/* line 35, ../sass/gravitant-styles.scss */
+.compare-item {
+  width: 100px;
+  display: inline-block;
+}
+
+/* line 40, ../sass/gravitant-styles.scss */
+.compare-item img {
+  width: 100px;
+}
+
+@media screen and (min-width: 480px) {
+  /* line 46, ../sass/gravitant-styles.scss */
+  .phone-disabled {
+    display: block;
+  }
+
+  /* line 49, ../sass/gravitant-styles.scss */
+  .grid {
+    display: inline-block;
+    width: 31%;
+    margin-right: 1.5em;
+    min-height: 300px;
+    margin-bottom: 3em;
+  }
+}

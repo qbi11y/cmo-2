@@ -1,5 +1,130 @@
-service store
-<div ng-repeat="service in catalog">
-    <div><img ng-src="{{service.icon}}"></div>
-    <div>{{ service.serviceName }}</div>
+<div class="container-fluid">
+    <div class="row" ng-show="cartResponse != undefined">
+        <div class="col-sm-12">
+            <div class="alert alert-success alert-dismissible fade in" ng-show="cartResponse" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><i class="fa fa-check"></i><span>The service was successfully added to the cart.</span>
+            </div>
+
+            <div class="alert alert-danger alert-dismissible fade in" ng-show="!cartResponse" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><i class="fa fa-check"></i><span>There is a problem on our end.</span>
+            </div>
+        </div>
+    </div><!-- end the row -->
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group has-feedback">
+                <input type="text" placeholder="Search Products" class="form-control" ng-model="searchText">
+                <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+            </div>
+        </div>
+        
+        <div class="col-sm-6 phone-disabled">
+            Filter By: 
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Providers<span class="caret"></span></button>
+                
+                <ul class="dropdown-menu" role="menu">
+                    <li ng-repeat="provider in defaultCatalogProviders"><input type="checkbox" value="{{provider.id}}" ng-model="selectedProvider" ng-click="updateProviderFilter(provider, selectedProvider)"> {{ provider.name }}</li>
+                </ul>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Category<span class="caret"></span></button>
+                
+                <ul class="dropdown-menu" role="menu">
+                    <li>Infrastructure Resources</li>
+                    <li>Managed Services</li>
+                    <li>Network Services</li>
+                    <li>User Defined Services</li>
+                </ul>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Sub Category<span class="caret"></span></button>
+                
+                <ul class="dropdown-menu" role="menu">
+                    <li>Sub Category 1</li>
+                    <li>Sub Category 2</li>
+                    <li>Sub Category 3</li>
+                </ul>
+            </div>
+        </div>
+    </div><!-- end row -->
+
+    <!--
+    <div class="row">    
+        <div class="col-md-3">
+            <div ng-include="'filters.html'"></div>
+        </div>
+    </div>--><!-- end the row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row phone-disabled">
+                <div class="col-sm-1"><a href="#store/compare">Compare</a></div>
+                <div class="col-sm-11">
+                    <div class="compare-item" ng-repeat="item in compareItems"><img ng-src="{{ item.icon }}"></div>
+                </div>
+            </div><!-- end .row phone-disabled -->
+
+            <div class="row phone-disabled">
+                <div class="col-sm-12">
+                    <button ng-click="switchView('grid')" type="button" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+                    </button>
+
+                    <button ng-click="switchView('list')" type="button" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div><!-- end .row phone-disabled -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="list" ng-class="{grid: selectedView == 'grid'}" ng-repeat="product in catalog.services | filter: searchText | orderBy: product.providerID" ng-show="product.visible">
+                        <div class="list-logo clearfix"><img ng-src="{{ product.icon }}"></div>
+                        <div class="list-header">{{ product.serviceName }}</div>
+                        <div>{{ product.serviceType }}</div>
+                        <div>{{ product.startingPrice | currency }}</div>
+                        <div>{{ product.points }}</div>
+                        <div class="list-text">{{ product.description }}</div>
+                        <div><a href="#/{{currentLinkedTenantID}}/service-store/configure-service/{{product.id}}" class="btn btn-primary">Configure</a></div>
+                        <div class="phone-disabled"><input type='checkbox'  ng-click="updateCompare(product, item)" ng-model="item"> Compare</div>
+                    </div><!-- end ng-repeat -->
+                </div>
+            </div><!-- end row -->
+        </div><!-- end column -->
+    </div><!-- end row -->
+</div><!-- end container-fluid -->
+
+
+    <!--
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="list grid" ng-class="{grid: selectedView == 'grid'}" ng-repeat="product in catalog.servic | filter:searchText" id="{{ product.id }}" ng-mouseenter="showConfigure($event)">
+    <div class="list-image">
+    <div class="col-xs-6 image text-left"><a href="#store/details"><img ng-model="checkbox" ng-src="{{ product.icon }}"></a></div>
+    <div class="col-xs-6 text-right">
+    <div>starting at</div>
+    <div class="list-item-sub">{{ product.startingPrice | currency }}</div>
+    <div class="clearfix"><a href="#/store/configure" class="btn btn-primary" ng-click="configure(product)">Configure</a></div>
+    </div>
+    </div>
+    <div class="list-text">
+    <div class="list-item-sub"><a href="#store/details">{{ product.serviceName }}</a></div>
+    <div><strong>Type:</strong> {{ product.serviceType }}</div>
+    <div><strong>Points:</strong> {{ product.points | number }}</div>
+    <div><a href="#store/details" >{{ product.shortDescription }}</a></div>
+    <div class="checkbox phone-disabled">
+    <label>
+    <input type="checkbox" ng-model="checkbox" ng-change="setCompare(product, checkbox)">Compare
+    </label>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+-->
 </div>

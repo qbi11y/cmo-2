@@ -1,0 +1,166 @@
+<!-- basic settings accordion section -->
+<div class="row">
+  <div class="col-sm-12">
+    <h3>{{ configureProduct.name }}</h3>
+    <p>{{ configureProduct.description }}</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" onclick="return false;">
+            Basic Settings (required)
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            <form role="form">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Service Name</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Service Name">
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInput1">Estimated Total Storage</label>
+                <div class="input-group">                                 
+                  <input type="text" class="form-control" id="exampleInput1" data-rule-required="true" placeholder="Enter value for Estimated Total Storage" data-toggle="tooltip" data-placement="right" data-trigger="focus" title="only used for estimating costs" value="100">                                 
+                  <div class="input-group-addon">
+                    <label for="exampleInput1">GB</label>
+                  </div>                                  
+                </div>  
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Storage Type</label>
+                  <select class="form-control">
+                    <option>Select Storage Type</option>
+                    <option>Standard</option>
+                    <option>Reduced Redundancy</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="locationList">Select Location</label> 
+                  <select class="form-control" id="locSelectLstId" name="cloudLocation">
+                    <option value="e480ebbd-913e-4a2e-8dd0-eabce70f4748">South America (Sao Paulo) (sa-east-1)</option>
+                    <option value="173232b6-1928-43ad-9d63-c2b7cd153605">US East (Northern Virginia) (us-east-1)</option>
+                    <option value="34fb80dd-aade-4f32-983e-9b0a5fd9c09b">EU (Ireland) (eu-west-1)</option>
+                    <option value="bc4b38f1-bfd7-46d7-85ab-87da51fea42b">US West (Northern California) (us-west-1)</option>
+                    <option value="4fcb3921-31a7-4751-b4d3-b66ee0901762">Asia Pacific (Tokyo) (ap-northeast-1)</option>
+                    <option value="b0395964-496d-41ed-8e58-c9b68c27bfd7">US West (Oregon) (us-west-2)</option>
+                    <option value="ab1cdbf4-ce29-45af-b8f9-8bd0a9a1d061">Asia Pacific (Singapore) (ap-southeast-1)</option>
+                    <option value="ea1009a3-e092-434d-98e5-9f030e169f73">Asia Pacific (Sydney) (ap-southeast-2)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleCalendar">*Calendar Label</label>
+                  <div class="input-group date" data-provide="datepicker" data-toggle="tooltip" required="" title="" data-placement="right" data-trigger="focus" data-original-title="Some tooltip text!">
+                    <input type="text" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="radio-inline col-md-3">
+                    <input class="" type="radio" name="inlineRadioOptions" id="Radio1" value="option1">
+                    <span>Existing Account</span>
+                  </label>
+                  <div class="col-md-5">
+                    <select class="full-width" id="Select1">
+                      <option>Account 1</option>
+                    </select> 
+                  </div>
+                  <label class="radio-inline col-md-4">
+                    <input type="radio" name="inlineRadioOptions" id="Radio2" value="option2">
+                    <span>Create New Account</span>
+                  </label>
+                </div>
+            </form>                             
+          </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- advance accordion section -->
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="headingTwo">
+    <h4 class="panel-title">
+      <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="return false;">
+        Advance Settings (optional)
+      </a>
+    </h4>
+  </div>
+  <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+    <div class="panel-body">
+      <div> 
+        <div class="form-group">
+          <label for="exampleInput1">*Monthly Download</label>
+          <div class="input-group">                                 
+            <input type="text" class="form-control" id="exampleInput1" data-rule-required="true" placeholder="Enter value for Monthly Download" data-toggle="tooltip" data-placement="right" data-trigger="focus" title="only used for estimating costs,only integers allowed" value="1000" name="attributeList[2].value">                                 
+            <div class="input-group-addon">
+              <label for="exampleInput1">GB</label>
+            </div>                                  
+          </div>
+        </div>
+
+        <div> 
+          <div class="form-group">
+            <label for="exampleInput1">*Monthly number of Gets</label>
+            <input type="text" class="form-control" id="exampleInput1" data-rule-required="true" placeholder="Enter value for Monthly number of Gets" data-toggle="tooltip" data-placement="right" data-trigger="focus" title="only used for estimating costs" value="1000" name="attributeList[3].value">
+          </div>
+        </div>
+
+        <div>
+          <div class="form-group">
+            <label for="exampleInput1">*Monthly number of Puts</label>
+            <input type="text" class="form-control" id="exampleInput1" data-rule-required="true" placeholder="Enter value for Monthly number of Puts" data-toggle="tooltip" data-placement="right" data-trigger="focus" title="only used for estimating costs" value="1000" name="attributeList[4].value">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInput1">Log to  Resource Group</label>                             
+          <input type="text" class="form-control" id="exampleInput1" data-rule-required="true" placeholder="Enter value for Log to  Resource Group" data-toggle="tooltip" data-placement="right" data-trigger="focus" title="Specify any Amazon S3 resource group name that should contain the logging, if not specified, then log to same location" value="" name="attributeList[6].value">
+        </div>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Enable Logging
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- account accordion section -->
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="headingFour">
+    <h4 class="panel-title">
+      <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour" onclick="return false;">
+      Special Requests (optional)
+      </a>
+    </h4>
+  </div>
+  <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+    <div class="panel-body">
+      <div role="form">
+        <div class="form-group">          
+          <div>Place special request for this order here</div>
+          <textarea class="form-control" rows="5"></textarea>
+          <button class="btn btn-primary btn-block phone-disabled">Upload File</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <a href="#store/configure/summary" class="btn btn-primary btn-block" ng-click="topOfPage()">Done</a>
+  </div>
+</div>

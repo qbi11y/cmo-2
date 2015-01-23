@@ -37,6 +37,7 @@ while ($row = mysql_fetch_array($services_query)) {
     $obj->id = $row['id'];
     $obj->providerID = $row['providerID'];
     $obj->name = $row['name'];
+    $obj->startingPrice = $row['startingPrice'];
     $obj->description = $row['description'];
     array_push($services, $obj);
 }

@@ -12,6 +12,11 @@ app.config(['$routeProvider', function($routeProvider){
         templateUrl: 'services.html',
         controller: 'StoreController'
     })
+
+    .when('/:linkedTenantID/service-store/configure-service/:serviceID', {
+        templateUrl: 'services-configure.html',
+        controller: 'ServiceConfigureController'
+    })
 }]);
 
 

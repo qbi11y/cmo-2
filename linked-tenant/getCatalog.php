@@ -28,6 +28,7 @@ while ($row = mysql_fetch_array($catalog_query)) {
     $obj->linkedTenantID = $row['linkedTenantID'];
     $obj->providerID = $row['providerID'];
     $obj->serviceName = $row['serviceName'];
+    $obj->startingPrice = $row['startingPrice'];
     $obj->description = $row['desctiption'];
     $obj->icon = $row['icon'];
     array_push($catalog, $obj);
