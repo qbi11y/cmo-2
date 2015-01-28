@@ -1,3 +1,4 @@
+<div ng-include="'header.html'"></div>
 <div class="container-fluid">
     <div class="row" ng-show="cartResponse != undefined">
         <div class="col-sm-12">
@@ -12,14 +13,14 @@
     </div><!-- end the row -->
 
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group has-feedback">
                 <input type="text" placeholder="Search Products" class="form-control" ng-model="searchText">
                 <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
             </div>
         </div>
         
-        <div class="col-sm-6 phone-disabled">
+        <div class="col-sm-8 phone-disabled">
             Filter By: 
             <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Providers<span class="caret"></span></button>
@@ -49,6 +50,19 @@
                     <li>Sub Category 3</li>
                 </ul>
             </div>
+            
+            Sort By:
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Most Recent<span class="caret"></span></button>
+                
+                <ul class="dropdown-menu" role="menu">
+                    <li><a>A to Z</a></li>
+                    <li><a>Z to A</a></li>
+                    <li><a>High Price to Low Price</a></li>
+                    <li><a>Low Price to High Price</a></li>
+                    <li><a>Featured</a></li>
+                </ul>
+            </div>
         </div>
     </div><!-- end row -->
 
@@ -63,7 +77,7 @@
         <div class="col-md-12">
             <div class="row phone-disabled">
                 <div class="col-sm-1"><a href="#store/compare">Compare</a></div>
-                <div class="col-sm-11">
+                <div class="col-sm-11">Investigate broader searching. Custom request form for a service. Service will be added to catalog if demand is there.
                     <div class="compare-item" ng-repeat="item in compareItems"><img ng-src="{{ item.icon }}"></div>
                 </div>
             </div><!-- end .row phone-disabled -->
@@ -81,15 +95,25 @@
             </div><!-- end .row phone-disabled -->
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="list" ng-class="{grid: selectedView == 'grid'}" ng-repeat="product in catalog.services | filter: searchText | orderBy: product.providerID" ng-show="product.visible">
-                        <div class="list-logo clearfix"><img ng-src="{{ product.icon }}"></div>
+                    <div class="list" ng-class="{grid: selectedView == 'grid', hover: isHovered(product)}" ng-mouseenter="setHover(product,'enter')" ng-mouseleave="setHover(product, 'out')" ng-repeat="product in catalog.services | filter: searchText | orderBy: product.providerID" ng-show="product.visible">
+                        <div class="list-logo"><img ng-src="{{ product.icon }}"></div>
                         <div class="list-header">{{ product.serviceName }}</div>
+                        <div>Put Provider Name Here{{ product.providerName }}</div>
                         <div>{{ product.serviceType }}</div>
                         <div>{{ product.startingPrice | currency }}</div>
                         <div>{{ product.points }}</div>
                         <div class="list-text">{{ product.description }}</div>
-                        <div><a href="#/{{currentLinkedTenantID}}/service-store/configure-service/{{product.id}}" class="btn btn-primary">Configure</a></div>
-                        <div class="phone-disabled"><input type='checkbox'  ng-click="updateCompare(product, item)" ng-model="item"> Compare</div>
+                        
+
+                        <div ng-class="{active: isHovered(product), inactive: !isHovered(product)}">
+                            <div class="item-overlay">
+                                <div class="list-header">{{ product.serviceName }}</div>
+                                <div><input type='checkbox'  ng-click="updateCompare(product, item)" ng-model="item"> Compare</div>
+                                <div><a href="#/{{currentLinkedTenantID}}/{{currentUserID}}/service-store/configure-service/{{product.id}}" class="btn btn-primary" ng-click="configureService(product)">Configure</a></div>
+                                <div><a href="#/{{currentLinkedTenantID}}/{{currentUserID}}/service-store/service-details/{{product.id}}" ng-click="setServiceDetails(product)">More Info</a></div>
+                            </div>                            
+                        </div>
+                        
                     </div><!-- end ng-repeat -->
                 </div>
             </div><!-- end row -->

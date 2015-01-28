@@ -1,8 +1,9 @@
 <!-- basic settings accordion section -->
 <div class="row">
   <div class="col-sm-12">
-    <h3>{{ configureProduct.name }}</h3>
-    <p>{{ configureProduct.description }}</p>
+    {{item}}
+    <h3>{{ item.serviceName }}</h3>
+    <p>{{ item.description }}</p>
   </div>
 </div>
 
@@ -150,7 +151,7 @@
       <div role="form">
         <div class="form-group">          
           <div>Place special request for this order here</div>
-          <textarea class="form-control" rows="5"></textarea>
+          <textarea class="form-control" rows="5">File or Text?</textarea>
           <button class="btn btn-primary btn-block phone-disabled">Upload File</a>
         </div>
       </div>
@@ -161,6 +162,6 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <a href="#store/configure/summary" class="btn btn-primary btn-block" ng-click="topOfPage()">Done</a>
+    <a href="#/{{currentLinkedTenantID}}/{{currentUserID}}/service-store/configure-service-summary/{{item.id}}" class="btn btn-primary btn-block" ng-click="topOfPage()">Done</a>
   </div>
 </div>

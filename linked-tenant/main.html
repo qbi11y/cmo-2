@@ -1,5 +1,6 @@
-<h3>Landing Page</h3>
-<div><a href="#/{{currentLinkedTenant}}/service-store">Browse Service Store</a></div>
-<div>Customer Administration</div>
-<div>Billing</div>
-<div>Monitoring</div>
+<div ng-include="'header.html'"></div>
+<h3 ng-init="getUser(currentUserID)">Landing Page</h3>
+<div><a href="#/{{currentLinkedTenantID}}/{{currentUserID}}/service-store" ng-show="currentUser.roleID <= 3">Browse Service Store</a></div>
+<div><a href="#/{{currentLinkedTenantID}}/{{currentUserID}}/admin/users" ng-show="currentUser.roleID  == 1">Customer Administration</a></div>
+<div ng-show="currentUser.roleID  == 1">Billing</div>
+<div ng-show="currentUser.roleID  <= 2">Monitoring</div>

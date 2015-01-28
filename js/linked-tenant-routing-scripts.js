@@ -3,19 +3,44 @@ var app = angular.module('CloudMatrix', ['ngRoute', 'LinkedTenantControllers']);
 app.config(['$routeProvider', function($routeProvider){
     $routeProvider
 
-    .when('/:linkedTenantID', {
+    .when('/:linkedTenantID/:userID', {
         templateUrl: 'main.html',
         controller: 'LinkedTenantController'
     })
 
-    .when('/:linkedTenantID/service-store', {
+    .when('/:linkedTenantID/:userID/service-store', {
         templateUrl: 'services.html',
         controller: 'StoreController'
     })
 
-    .when('/:linkedTenantID/service-store/configure-service/:serviceID', {
+    .when('/:linkedTenantID/:userID/service-store/configure-service/:serviceID', {
         templateUrl: 'services-configure.html',
-        controller: 'ServiceConfigureController'
+        controller: 'ConfigureServiceController'
+    })
+
+    .when('/:linkedTenantID/:userID/service-store/service-details/:serviceID', {
+        templateUrl: 'services-details.html',
+        controller: 'ServiceDetailsController'
+    })
+
+    .when('/:linkedTenantID/:userID/service-store/configure-service-summary/:serviceID', {
+        templateUrl: 'services-configure-summary.html',
+        controller: 'ConfigureServiceController'
+    })
+
+    .when('/:linkedTenantID/:userID/service-store/shopping-cart', {
+        templateUrl: 'shopping-cart.html',
+        controller: 'CartController'
+    })
+
+    .when('/:linkedTenantID/:userID/admin/users', {
+        templateUrl: 'users.html',
+        controller: 'AdministrationController'
+    })
+
+    .when('/:linkedTenantID/:userID/admin/users/add-user', {
+        templateUrl: 'add-user.html',
+        controller: 'AdministrationController'
     })
 }]);
 

@@ -31,7 +31,7 @@ while ($row = mysql_fetch_array($query)) {
 }
 
 for ($n=0; $n < sizeof($catalog); $n++) {
-mysql_query("INSERT INTO linkedTenantCatalogs (id, linkedTenantID, providerID, defaultCatalogID, serviceName, points, startingPrice, description, icon) VALUES('',".$obj->id.",".$catalog[$n]->providerID.", ".$catalog[$n]->id.", '".$catalog[$n]->name."', ".$catalog[$n]->points.", ".$catalog[$n]->startingPrice.", '".$catalog[$n]->description."', '".$catalog[$n]->icon."')") or die ('Query is invalid: ' . mysql_error());
+mysql_query("INSERT INTO linkedTenantCatalogs (id, linkedTenantID, providerID, defaultCatalogID, serviceName, points, startingPrice, description, icon) VALUES('',".$obj->id.",".$catalog[$n]->providerID.", ".$catalog[$n]->id.", '".$catalog[$n]->name."', 1000, 500, '".$catalog[$n]->description."', '".$catalog[$n]->icon."')") or die ('Query is invalid: ' . mysql_error());
 }
 echo json_encode($obj);
 

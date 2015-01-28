@@ -1,0 +1,40 @@
+
+   item  {{ item }}
+    <div class="row">
+        <div class="col-sm-12"> 
+            <div><img ng-src="{{ configureProduct.thumbnail }}"></div>
+            <div class="text-center"><h3>{{ configureProduct.name }}</h3></div>
+            <div class="text-center list-item-sub">$500 per month<br>$50 one time fee</div>
+            <div>{{ configureProduct.description }}</div>
+        </div>
+    </div>
+    
+    <div class="row summary-category" ng-repeat="product in configureProduct.categories">
+        <div class="col-sm-12">
+            <div class="col-sm-12"><h2>{{ product.name }}</h2></div>
+            <div class="col-xs-12 list-item" ng-repeat="spec in product.options">
+                <div class="col-xs-6">{{ spec.name }}</div>
+                <div class="col-xs-6">{{ spec.value }}</div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="text-center">Similar Products</h4>
+    <div class="row">
+        <div class="col-sm12">
+
+            <div class="simple-list clearfix" ng-repeat="options in similarProducts">
+                <div class="col-xs-8">
+                    <div><img ng-src="{{ options.thumbnail }}"></div>
+                    <div><strong>Points: </strong>{{ options.points }}</div>
+                </div>
+                <div class="col-xs-4 list-item-sub text-right">{{ options.price | currency }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <a href="#/{{currentLinkedTenantID}}/{{currentUserID}}/service-store" class="btn btn-primary btn-block" ng-click="addToCart(item)">Add to Cart</a>
+        </div>
+    </div>

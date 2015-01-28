@@ -1,17 +1,25 @@
+$text-gray: rgba(125, 125, 125, 1);
+
 * {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
 
-/*styles for the list/grid views*/
-.phone-disabled {
+.phone-disabled, .inactive {
     display: none;
 }
 
+.active, .phone-active {
+    display: block;
+}
+
+/*styles for the list/grid views*/
 .list {
     border-bottom: 1px dotted gray;
+    border-top: 2px solid white;
     vertical-align: top;
+    position: relative;;
 }
 
 .list-header {
@@ -23,11 +31,12 @@
 }
 
 .list-logo {
-    min-height: 5em;
+    min-height: 6em;
 }
 
 .list-text {
     min-height: 5em;
+    color: $text-gray;
 }
 
 /* end styles for list/grid view */
@@ -41,8 +50,15 @@
     width: 100px;
 }
 
+.hover {
+    border-top: 2px solid red;
+}
+
 
 @media screen and (min-width: 480px) {
+    .phone-active {
+        display: none;
+    }
     .phone-disabled {
     display: block;
 }
@@ -52,5 +68,14 @@
         margin-right: 1.5em;
         min-height: 300px;
         margin-bottom: 3em;
+    }
+    .item-overlay {
+        display: block;
+        position: absolute;
+        top: 0;
+        background-color: rgba(200, 200, 200, .95);
+        width: 100%;
+        min-height: 300px;
+        padding: 2em;
     }
 }

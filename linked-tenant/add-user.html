@@ -1,0 +1,37 @@
+<div class="alert alert-success" role="alert" ng-show="addedUser.id">{{ addedUser.firstName }} {{addedUser.lastName }} was successfully added! {{ addedUser.firstName }} can access cloudMatrix using this link: <a href="#/{{currentLinkedTenantID}}/{{addedUser.id}}">http://localhost/linked-tenant/#/{{currentLinkedTenantID}}/{{addedUser.id}}</a></div>
+<form role="form">
+    <div class="form-group">
+        <label>User Role</label>
+        <select class="form-control" ng-model="userForm.roleID" ng-init="userForm.roleID = 0">
+            <option value="0">Select User Role</option>
+            <option ng-repeat="role in userRoles" value="{{role.id}}">{{ role.role}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>First Name</label>
+        <input type="text" class="form-control" placeholder="Enter user's first name" ng-model="userForm.firstName">
+    </div>
+
+    <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" class="form-control" placeholder="Enter user's last name" ng-model="userForm.lastName">
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-control" placeholder="Enter user's email"  ng-model="userForm.email">
+    </div>
+
+    <div class="form-group">
+        <a href="" class="btn btn-primary btn-block" ng-click="addUser(userForm)">Add User</a>
+    </div>
+
+    <div class="form-group">
+        <a href="" class="btn btn-primary btn-block">Import From Directory</a>
+    </div>
+
+    <div class="form-group">
+        <input type="hidden" ng-model="userForm.tenantID" ng-init="userForm.tenantID = currentLinkedTenantID">
+    </div>
+</form>
