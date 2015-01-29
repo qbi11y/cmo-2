@@ -19,7 +19,7 @@ var_dump($postdata);
 echo $user->id;
 mysql_select_db ($database) or die ('Cannot connect to the database: ' . mysql_error());
 
-mysql_query("INSERT INTO orders (id, userID, viewed) VALUES('', ".$user->id.", 'n')") or die ('ORDER WAS NOT CREATED - Query is invalid: ' . mysql_error());
+mysql_query("INSERT INTO orders (id, userID, linkedTenantID, viewed) VALUES('', ".$user->id.",".$user->tenantID.", 'n')") or die ('ORDER WAS NOT CREATED - Query is invalid: ' . mysql_error());
 $orderID = mysql_insert_id();
 
 for ($n=0; $n < sizeof($items); $n++) {

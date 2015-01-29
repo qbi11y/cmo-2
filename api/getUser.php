@@ -19,6 +19,7 @@ while ($row = mysql_fetch_array($user_query)) {
     $obj = new stdClass();
     $obj->id = $row['id'];
     $obj->roleID= $row['roleID'];
+    $obj->tenantID = $row['tenantID'];
     $obj->firstName = $row['firstName'];
     $obj->lastName = $row['lastName'];
     $obj->email = $row['email'];

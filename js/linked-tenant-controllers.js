@@ -20,6 +20,7 @@ ctrl.controller('CartController', ['$scope', '$http', '$routeParams', '$location
     $scope.currentUser = Users.getUser();
     $scope.currentLinkedTenantID = $routeParams.linkedTenantID;
     $scope.currentUserID = $routeParams.userID;
+    console.log('current user', $scope.currentUser);
     $scope.submitOrder = function(user, items) {
         $scope.order = {};
         $scope.order.user = user;

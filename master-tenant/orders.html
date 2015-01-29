@@ -1,0 +1,5 @@
+<div>Total Orders: {{ orders.length }}</div>
+<div>Total Order Items: {{ totalItems }}</div>
+<div ng-repeat="order in orders">
+    <span><a href="#/{{currentMasterTenantID}}/order-details/{{order.orderID}}">{{order.firstName}} {{ order.lastName }}</a></span><span>{{ order.totalItems}}</span>
+</div>

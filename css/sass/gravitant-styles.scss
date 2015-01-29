@@ -50,10 +50,6 @@ $text-gray: rgba(125, 125, 125, 1);
     width: 100px;
 }
 
-.hover {
-    border-top: 2px solid red;
-}
-
 
 @media screen and (min-width: 480px) {
     .phone-active {
@@ -62,6 +58,28 @@ $text-gray: rgba(125, 125, 125, 1);
     .phone-disabled {
     display: block;
 }
+    .grid {
+        display: inline-block;
+        width: 47%;
+        margin-right: 1.5em;
+        min-height: 300px;
+        margin-bottom: 3em;
+    }
+    .item-overlay {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 786px) {
+    .phone-active, .desktop-disabled {
+        display: none;
+    }
+    .hover {
+    border-top: 2px solid red;
+    }
+    .phone-disabled {
+    display: block;
+    }
     .grid {
         display: inline-block;
         width: 31%;

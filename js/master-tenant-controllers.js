@@ -4,6 +4,57 @@ ctrl.controller('CreateTenantController', ['$scope', '$http', function($scope, $
     
 }]);
 
+ctrl.controller('OrderController', ['$scope', '$http', '$routeParams','Orders', function($scope, $http, $routeParams, Orders) {
+    $scope.orders = Orders.getOrders();
+    $scope.orderItems = Orders.getOrderItems();
+    $scope.totalItems = 0;
+    $scope.currentMasterTenantID = $routeParams.masterTenantID;
+
+    $http.post('../api/getOrderItems.php', $scope.orders).success(function(data) {
+        console.log('items', data);
+        Orders.setOrderItems(data);
+        $scope.orderItems = Orders.getOrderItems();
+        $scope.sortOrders();
+    });
+
+    $scope.sortOrders = function() {
+        var totalItems = 0;
+        for (var n=0; n < $scope.orders.length; n++) {
+            var count = 0;
+           for (var i=0; i < $scope.orderItems.length; i++) {
+                for (var s=0; s < $scope.orderItems[i].length; s++){
+                    if ($scope.orders[n].orderID == $scope.orderItems[i][s].orderID) {
+                        count++;
+                        totalItems++;
+                        $scope.totalItems = totalItems;
+                        $scope.orders[n].totalItems = count;
+                        console.log($scope.orders[n].totalItems, $scope.orderItems[i][s]);                         
+                    }                   
+                }                
+           }
+        }
+    }
+
+    console.log('orders to send', $scope.orders);
+    
+
+    /*
+    for (var n=0; n < $scope.orders.length; n++) {
+        
+        $http.get('../api/getOrderItems.php?orderID='+$scope.orders[n].orderID).success(function(data) { 
+            console.log(n);
+            Orders.setOrderItems(data);            
+            if (n == $scope.orders.length) {            
+                $scope.sortOrders(Orders.getOrderItems());
+            }
+        });
+        
+    }
+    */
+
+    
+}]);
+
 ctrl.controller('LinkedTenantDetailsController', ['$scope', '$http', '$routeParams','Tenant','Catalog', function($scope, $http, $routeParams, Tenant, Catalog) {
 
 $scope.compareCatalogs = function(){
@@ -142,8 +193,16 @@ ctrl.controller('CatalogController', ['$scope','$http','$routeParams','MasterTen
     });
 }]);
 
-ctrl.controller('MasterTenantController', ['$scope', '$http','$routeParams', '$firebase', 'MasterTenant', 'TenantList', function($scope, $http, $routeParams, $firebase, MasterTenant, TenantList) {
-    
+ctrl.controller('MasterTenantController', ['$scope', '$http','$routeParams', '$firebase', 'MasterTenant', 'TenantList', 'Orders', function($scope, $http, $routeParams, $firebase, MasterTenant, TenantList, Orders) {
+    $scope.orders = Orders.getOrders();
+    $scope.getOrders = function() {
+       $http.get('../api/getOrders.php?masterTenantID='+$routeParams.masterTenantID).success(function(data) {
+            console.log('order data', data);
+            Orders.setOrders(data);
+            $scope.orders = Orders.getOrders();
+       });
+    }
+    $scope.getOrders();
     //var sync = $firebase(fb);
     //var syncObject = sync.$asArray();
     //console.log('firebase  object', syncObject);

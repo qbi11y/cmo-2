@@ -42,4 +42,9 @@ app.config(['$routeProvider', function($routeProvider){
         templateUrl: 'linked-tenants-list.html',
         controller: 'LinkedTenantsList'
     })
+
+    .when('/:masterTenantID/orders', {
+        templateUrl: 'orders.html',
+        controller: 'OrderController'
+    })
 }]);

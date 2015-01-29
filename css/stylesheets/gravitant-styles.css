@@ -57,23 +57,48 @@
   width: 100px;
 }
 
-/* line 53, ../sass/gravitant-styles.scss */
-.hover {
-  border-top: 2px solid red;
-}
-
 @media screen and (min-width: 480px) {
-  /* line 59, ../sass/gravitant-styles.scss */
+  /* line 55, ../sass/gravitant-styles.scss */
   .phone-active {
     display: none;
   }
 
-  /* line 62, ../sass/gravitant-styles.scss */
+  /* line 58, ../sass/gravitant-styles.scss */
   .phone-disabled {
     display: block;
   }
 
-  /* line 65, ../sass/gravitant-styles.scss */
+  /* line 61, ../sass/gravitant-styles.scss */
+  .grid {
+    display: inline-block;
+    width: 47%;
+    margin-right: 1.5em;
+    min-height: 300px;
+    margin-bottom: 3em;
+  }
+
+  /* line 68, ../sass/gravitant-styles.scss */
+  .item-overlay {
+    display: none;
+  }
+}
+@media screen and (min-width: 786px) {
+  /* line 74, ../sass/gravitant-styles.scss */
+  .phone-active, .desktop-disabled {
+    display: none;
+  }
+
+  /* line 77, ../sass/gravitant-styles.scss */
+  .hover {
+    border-top: 2px solid red;
+  }
+
+  /* line 80, ../sass/gravitant-styles.scss */
+  .phone-disabled {
+    display: block;
+  }
+
+  /* line 83, ../sass/gravitant-styles.scss */
   .grid {
     display: inline-block;
     width: 31%;
@@ -82,7 +107,7 @@
     margin-bottom: 3em;
   }
 
-  /* line 72, ../sass/gravitant-styles.scss */
+  /* line 90, ../sass/gravitant-styles.scss */
   .item-overlay {
     display: block;
     position: absolute;
