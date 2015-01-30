@@ -10,7 +10,12 @@ ctrl.controller('LinkedTenantController', ['$scope', '$http','$routeParams', 'Us
         $http.get('../api/getUser.php?id='+user).success(function(response) {
             Users.setUser(response);
             $scope.currentUser = Users.getUser();
+            console.log('user', response);
         });
+    }
+
+    if (!$scope.currentUser.id) {
+        $scope.getUser($scope.currentUserID);
     }
 }]);
     
@@ -64,6 +69,7 @@ ctrl.controller('AdministrationController', ['$scope', '$http', '$routeParams','
     });
     $scope.addUser = function(data) {
         console.log('data to send', data);
+        data.masterTenantID = 0;
         $http.post('../api/addUser.php', data).success(function(response) {
             $scope.addedUser = response;
             $scope.userForm = {};

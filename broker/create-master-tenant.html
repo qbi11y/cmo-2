@@ -24,6 +24,10 @@ test {{ masterTenantForm }}
 
     {{ masterTenantForm }}
     <div class="form-group">
-        <a href="#/create-master-tenant-summary" class="btn btn-primary btn-block" ng-click="setNewMasterTenant()">Next</a>
+        <a href="#/{{currentBrokerID}}/{{currentUserID}}/create-master-tenant-summary" class="btn btn-primary btn-block" ng-click="setNewMasterTenant()">Next</a>
+    </div>
+
+    <div class="form-group">
+        <a href="#{{currentBrokerID}}/{{currentUserID}}/catalog" class="btn btn-primary btn-block">Cancel</a>
     </div>
 </form>

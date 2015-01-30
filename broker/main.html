@@ -1,7 +1,8 @@
 <!-- Broker Controller  broker-controller.js-->
+<div ng-include="'header.html'"></div>
 <h3>Broker Portal</h3>
-<div><a href="#master-tenant-list">View Master Tenants</a></div>
-<div>Customer Administration</div>
+<div><a href="#{{currentBrokerID}}/{{currentUserID}}/master-tenant-list">View Master Tenants</a></div>
+<div><a href="#/{{currentBrokerID}}/{{currentUserID}}/admin/users">Customer Administration</a></div>
 <div>Ordering</div>
 <div>Billing</div>
 <div>View as Customer</div>
@@ -13,4 +14,4 @@
 <div>Portal Notifications</div>
 <div>Budget Management</div>
 <div>Platform Administration</div>
-<div><a href="#catalog">Manage Default Catalog</a></div>
+<div><a href="#{{currentBrokerID}}/{{currentUserID}}/catalog">Manage Default Catalog</a></div>

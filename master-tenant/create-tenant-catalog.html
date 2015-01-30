@@ -11,8 +11,7 @@
                 <input type="radio" name="catalogAccess" value="partial" ng-model="tenantForm.catalogAccess"> Access to select providers and select services
             </label>
         </div>
-        {{ tenantForm }}
-        default catalog {{ defaultCatalog.services }}
+        
         <div ng-show="tenantForm.catalogAccess == 'partial'">
             <div ng-repeat="provider in defaultCatalog.providers">
                 <div class="checkbox">
@@ -31,7 +30,6 @@
             </div>
         </div>
     </div>
-    {{ tenantCatalog }}
     <div class="form-group">
         <a href="#/{{currentMasterTenant}}/create-tenant-summary" class="btn btn-primary btn-block">Next</a>
     </div>

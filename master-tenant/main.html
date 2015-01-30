@@ -1,7 +1,8 @@
+<div ng-include="'header.html'"></div>
 <h3>Master Tenant Admin Portal</h3>
-<div><a href="#/{{currentMasterTenant}}/linked-tenants-list">View Linked Tenants</a></div>
-<div>Customer Administration</div>
-<div><a href="#/{{currentMasterTenant}}/orders">Ordering <span class="badge">{{orders.length}}</a></div>
+<div><a href="#/{{currentMasterTenantID}}/{{currentUserID}}/linked-tenants-list">View Customers</a></div>
+<div><a href="#/{{currentMasterTenantID}}/{{currentUserID}}/admin/users">Operator Administration</a></div>
+<div><a href="#/{{currentMasterTenantID}}/{{currentUserID}}/orders">Ordering <span class="badge">{{orders.length}}</a></div>
 <div>Billing</div>
 <div>View as Customer</div>
 <div>Monitoring</div>
@@ -11,7 +12,7 @@
 <div>Budget Management</div>
 <div>Portal Notifications</div>
 <div>Platform Administration</div>
-<div><a href="#/{{currentMasterTenant}}/catalog">Manage Catalog</a></div>
+<div><a href="#/{{currentMasterTenant}}/{{currentUserID}}/catalog">Manage Catalog</a></div>
 <ul>
     <li>Add Provider</li>
     <li>Add Service</li>

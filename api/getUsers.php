@@ -11,11 +11,17 @@ if (!$link) {
     die('Connection failed: ' . mysql_error());
 }
 
-$id = $_GET['tenantID'];
-
 mysql_select_db ($database) or die ('Cannot connect to the database: ' . mysql_error());
+if ( $_GET['tenantID']) { //returns a linked tenant
+    $id = $_GET['tenantID'];
+    $user_query =mysql_query("SELECT * FROM users WHERE tenantID =".$id) or die ('Query is invalid: ' . mysql_error());
+} elseif ( $_GET['masterTenantID']) { //returns a master tenant
+    $id = $_GET['masterTenantID'];
+    $user_query =mysql_query("SELECT * FROM users WHERE masterTenantID =".$id) or die ('Query is invalid: ' . mysql_error());
+} else { //returns a broker
+    $user_query =mysql_query("SELECT * FROM users WHERE masterTenantID = 0 AND tenantID = 0") or die ('Query is invalid: ' . mysql_error());
+}
 
-$user_query =mysql_query("SELECT * FROM users WHERE tenantID =".$id) or die ('Query is invalid: ' . mysql_error());
 $role_query =mysql_query("SELECT * FROM roles") or die ('Query is invalid: ' . mysql_error());
 
 while ($row = mysql_fetch_array($role_query)) {

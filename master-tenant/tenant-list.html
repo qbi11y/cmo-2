@@ -1,4 +1,4 @@
-listing {{ tenantList }}
+
 <div>
     <form>
         <input type="search" class="form-control" placeholder="Search Linked Tenants" ng-model="searchText">
@@ -6,6 +6,6 @@ listing {{ tenantList }}
 </div>
 
 <div ng-repeat="tenant in tenantList | filter: searchText">
-    <span><a href="#/{{currentMasterTenant}}/linked-tenant-details/{{tenant.id}}" ng-click="setLinkedTenant(tenant.id)">{{ tenant.name }}</a></span><span><a href="">Manage Catalog</a>
+    <span><a href="#/{{currentMasterTenant}}/{{currentUserID}}/linked-tenant-details/{{tenant.id}}" ng-click="setLinkedTenant(tenant.id)">{{ tenant.name }}</a></span><span><a href="">Manage Catalog</a>
 </div>
 

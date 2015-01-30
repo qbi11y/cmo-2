@@ -25,6 +25,6 @@
 
     {{ addServiceForm }}
     <div class="form-group">
-        <a href="#/catalog" class="btn btn-primary btn-block" ng-click="createNewDefaultCatalogService(newServiceData)">Save and Create Service</a>
+        <a href="#/{{currentBrokerID}}/{{currentUserID}}/catalog" class="btn btn-primary btn-block" ng-click="createNewDefaultCatalogService(newServiceData)">Save and Create Service</a>
     </div>
 </form>

@@ -1,12 +1,10 @@
 <!-- TenantController -->
 <h3>Master Tenant Portal - Linked Tenant Details</h3>
-{{currentLinkedTenant}}
-<div>defaultCatalog: {{ defaultCatalog.services }}</div>
-<div>linkedTenantCatalog: {{ linkedTenantCatalog.services }}</div>
-Link: <a target="blank" href="http://localhost/cmo-2/linked-tenant/#/{{currentLinkedTenant.info.id}}">localhost/cmo-2/linked-tenant/#/{{currentLinkedTenant.info.id}}</a>
+Link: <a target="blank" href="http://localhost/cmo-2/linked-tenant/#/{{currentLinkedTenant.info.id}}/1">localhost/cmo-2/linked-tenant/#/{{currentLinkedTenant.info.id}}/1</a>
 <div>some details</div>
 <div>
-    {{defaultCatalog.services}}
+    <!--
+    Customer ID, Parent Customer, Parent Domain, Customer Name, Address, Status, Referred by, Subscription Level-Broker,, Subscription Status-Active, payment verified true/false, Billing Method  - PO, Auto Payment - No, Payment Identifier - PO , Expiration Date, Ext Customer ID, PO Number, PO Date, PO Status, PO Amount ---- Users of the Linked Tenant, Contacts for the linked Tenant, Catalog Details, Select Catalog by provider and services, what to do with new services added??? -->
     <div ng-repeat="service in defaultCatalog.services">
         <div><img ng-src="{{service.icon}}"></div>
         <div class="checkbox">

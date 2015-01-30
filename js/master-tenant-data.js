@@ -1,5 +1,32 @@
 var app = angular.module('Data', ['firebase']);
 
+app.factory('Users', function() {
+    var users = [];
+    var user = {};
+    var tenant = 0;
+
+    return {
+        getUsers: function() {
+            return users
+        },
+        setUsers: function(id) {
+            
+        },
+        getCurrentUser: function() {
+            return user;
+        },
+        setCurrentUser: function(data) {
+            user = data;
+        },
+        getTenant: function() {
+            return tenant
+        },
+        setTenant: function(data) {
+            tenant = data;
+        }
+    }
+});
+
 app.factory('Orders', function() {
     var orders = [];
     var orderItems = [];

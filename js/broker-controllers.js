@@ -2,17 +2,52 @@ var ctrl = angular.module('BrokerControllers', ['Data']);
 /*
 any controllers for the main.html broker portal go here
 */
-ctrl.controller('BrokerController', ['$scope', '$http', function($scope, $http) {
+ctrl.controller('BrokerController', ['$scope', '$http','$routeParams', function($scope, $http, $routeParams) {
+    $scope.currentBrokerID = $routeParams.brokerID;
+    $scope.currentUserID = $routeParams.userID;
 
 }]);
 
+ctrl.controller('AdministrationController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+    $scope.userForm = {};
+    $scope.currentBrokerID = $routeParams.brokerID;
+    $scope.currentUserID = $routeParams.userID;
+    $scope.userRoles = [];
+    $scope.allUsers = [];
+    $scope.addedUser = {};
+    
+    if ($scope.allUsers.length == 0) {
+        $http.get('../api/getUsers.php').success(function(response) {
+                console.log('response data', response);
+                $scope.allUsers = response.users;
+                $scope.roles = response.roles;
+            });
+    }
+
+    $scope.addUser = function(data) {
+        data.tenantID = 0;
+        data.masterTenantID = 0
+        $http.post('../api/addUser.php', data).success(function(response) {
+            console.log('added users', response);
+            $scope.addedUser = response;
+            $scope.userForm = {};
+            $scope.userForm.roleID = 0;
+        });
+    };
+
+    $http.get('../api/getUserRoles.php').success(function(data) {
+        $scope.userRoles = data;
+    });
+}]); 
 
 /*
 Controller for the master tenant list page
 Fetches the list of master tenants to display
 */
-ctrl.controller('MasterTenantListController', ['$scope', '$http','MasterTenantList','MasterTenantDetails', function($scope, $http, MasterTenantList, MasterTenantDetails) {
+ctrl.controller('MasterTenantListController', ['$scope', '$http','$routeParams', 'MasterTenantList','MasterTenantDetails', function($scope, $http, $routeParams, MasterTenantList, MasterTenantDetails) {
     $scope.masterTenantList = [];
+    $scope.currentBrokerID = $routeParams.brokerID;
+    $scope.currentUserID = $routeParams.userID;
     
     //sends request for the master tenant list
     $http.get('getMasterTenantList.php').success(function(data) {
@@ -26,6 +61,8 @@ Controller for the master tenant details page
 Fetches all of the data for the specified master tenant
 */
 ctrl.controller('MasterTenantDetailsController',['$scope', '$http', '$routeParams','MasterTenantDetails', function($scope, $http, $routeParams, MasterTenantDetails) {
+    $scope.currentBrokerID = $routeParams.brokerID;
+    $scope.currentUserID = $routeParams.userID;
     $scope.masterTenantDetails = MasterTenantDetails.getMasterTenantDetails();  //initate the masterTenantDetails variable
     $scope.getMasterTenantDetails = function(id) {
         $http.get('../api/getMasterTenantInfo.php?masterTenantID='+id).success(function(data) {
@@ -44,7 +81,9 @@ ctrl.controller('MasterTenantDetailsController',['$scope', '$http', '$routeParam
 Controller for the default catalog
 Fetches all of the data for the default catalog to be displayed
 */
-ctrl.controller('CatalogController', ['$scope', '$http', 'Catalog', function($scope, $http, Catalog) {
+ctrl.controller('CatalogController', ['$scope', '$http', '$routeParams', 'Catalog', function($scope, $http, $routeParams, Catalog) {
+    $scope.currentBrokerID = $routeParams.brokerID;
+    $scope.currentUserID = $routeParams.userID;
     $http.get('../api/getDefaultCatalog.php').success(function(data) {
         console.log('php ', data);
         Catalog.setCatalog(data);
@@ -53,9 +92,11 @@ ctrl.controller('CatalogController', ['$scope', '$http', 'Catalog', function($sc
     $scope.catalog = {};
 }]);
 
-ctrl.controller('CreateMasterTenantController', ['$scope', '$http', 'NewMasterTenant', function($scope, $http, NewMasterTenant) {
+ctrl.controller('CreateMasterTenantController', ['$scope', '$http','$routeParams', 'NewMasterTenant', function($scope, $http, $routeParams, NewMasterTenant) {
     //$scope.newMasterTenantID = 0;
     $scope.masterTenantForm = {};
+    $scope.currentBrokerID = $routeParams.brokerID;
+    $scope.currentUserID = $routeParams.userID;
     $scope.createMasterTenant = function() {
         $http.post('../api/createNewMasterTenant.php', NewMasterTenant.getNewMasterTenant())
 
@@ -76,6 +117,8 @@ ctrl.controller('CreateMasterTenantController', ['$scope', '$http', 'NewMasterTe
 Controller to handle the adding of new services to the catalog
 */
 ctrl.controller('AddServiceController', ['$scope', '$http', '$routeParams', 'NewServiceData','Catalog', function($scope, $http, $routeParams, NewServiceData, Catalog) {
+    $scope.currentBrokerID = $routeParams.brokerID;
+    $scope.currentUserID = $routeParams.userID;
     $scope.providers = [];
     $scope.addServiceForm = {};
     $scope.newServiceData = NewServiceData.getNewServiceData();

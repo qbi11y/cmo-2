@@ -94,7 +94,6 @@
                 </div>
             </div><!-- end .row phone-disabled -->
             <div class="row">
-                {{catalog}}
                 <div class="col-sm-12">
                     <div class="list" ng-class="{grid: selectedView == 'grid', hover: isHovered(product)}" ng-mouseenter="setHover(product,'enter')" ng-mouseleave="setHover(product, 'out')" ng-repeat="product in catalog.services | filter: searchText | orderBy: product.providerID" ng-show="product.visible">
                         <div class="list-logo"><img ng-src="{{ product.icon }}"></div>

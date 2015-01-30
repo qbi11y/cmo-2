@@ -1,6 +1,15 @@
 <div ng-include="'header.html'"></div>
 <h3 ng-init="getUser(currentUserID)">Landing Page</h3>
 <div><a href="#/{{currentLinkedTenantID}}/{{currentUserID}}/service-store" ng-show="currentUser.roleID <= 3">Browse Service Store</a></div>
-<div><a href="#/{{currentLinkedTenantID}}/{{currentUserID}}/admin/users" ng-show="currentUser.roleID  == 1">Customer Administration</a></div>
+<div><a href="#/{{currentLinkedTenantID}}/{{currentUserID}}/admin/users" ng-show="currentUser.roleID  == 1 || currentUserID == 1">User Administration</a></div>
 <div ng-show="currentUser.roleID  == 1">Billing</div>
 <div ng-show="currentUser.roleID  <= 2">Monitoring</div>
+<div>Order Approval</div>
+<div>Order Status</div>
+<div>My Services</div>
+<div>Planning Tools (Compare, Screen, Spend)</div>
+<div>VDC/Customer Solution</div>
+<div>Policy Management</div>
+<div>Budget Management</div>
+
+Simple Service Amazon S3 Storage, Simple VM Amazon EC2 (spot and reserved)

@@ -4,7 +4,37 @@ ctrl.controller('CreateTenantController', ['$scope', '$http', function($scope, $
     
 }]);
 
+ctrl.controller('AdministrationController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+    $scope.currentMasterTenantID = $routeParams.masterTenantID;
+    $scope.currentUserID = $routeParams.userID;
+    $scope.userRoles = [];
+    $scope.allUsers = [];
+    $scope.addedUser = {};
+    
+    if ($scope.allUsers.length == 0) {
+        $http.get('../api/getUsers.php?masterTenantID='+$scope.currentMasterTenantID).success(function(response) {
+                console.log('response data', response);
+                $scope.allUsers = response.users;
+                $scope.roles = response.roles;
+            });
+    }
+
+    $scope.addUser = function(data) {
+        data.tenantID = 0;
+        $http.post('../api/addUser.php', data).success(function(response) {
+            console.log('added users', response);
+            $scope.addedUser = response;
+        });
+    };
+
+    $http.get('../api/getUserRoles.php').success(function(data) {
+        $scope.userRoles = data;
+    });
+}]); 
+
 ctrl.controller('OrderController', ['$scope', '$http', '$routeParams','Orders', function($scope, $http, $routeParams, Orders) {
+    $scope.currentMasterTenantID = $routeParams.masterTenantID;
+    $scope.currentUserID = $routeParams.userID;
     $scope.orders = Orders.getOrders();
     $scope.orderItems = Orders.getOrderItems();
     $scope.totalItems = 0;
@@ -56,7 +86,8 @@ ctrl.controller('OrderController', ['$scope', '$http', '$routeParams','Orders', 
 }]);
 
 ctrl.controller('LinkedTenantDetailsController', ['$scope', '$http', '$routeParams','Tenant','Catalog', function($scope, $http, $routeParams, Tenant, Catalog) {
-
+$scope.currentMasterTenantID = $routeParams.masterTenantID;
+    $scope.currentUserID = $routeParams.userID;
 $scope.compareCatalogs = function(){
     //console.log('compare default', $scope.defaultCatalog.services);
     //console.log('compare tenant', $scope.linkedTenantCatalog.services);
@@ -153,6 +184,8 @@ $scope.getDefaultCatalog();
 }]);
 
 ctrl.controller('LinkedTenantsList', ['$scope', '$http','$routeParams','TenantList','MasterTenant', function($scope, $http, $routeParams, TenantList, MasterTenant) {
+    $scope.currentMasterTenantID = $routeParams.masterTenantID;
+    $scope.currentUserID = $routeParams.userID;
     MasterTenant.setCurrentMasterTenant($routeParams.masterTenantID);
     $scope.currentMasterTenant = MasterTenant.getCurrentMasterTenant();
     //console.log('current MT', $scope.currentMasterTenant);
@@ -165,6 +198,8 @@ ctrl.controller('LinkedTenantsList', ['$scope', '$http','$routeParams','TenantLi
 }]);
 
 ctrl.controller('CatalogController', ['$scope','$http','$routeParams','MasterTenant','Catalog', function($scope, $http, $routeParams, MasterTenant, Catalog) {
+    $scope.currentMasterTenantID = $routeParams.masterTenantID;
+    $scope.currentUserID = $routeParams.userID;
     $scope.catalog = {};
     MasterTenant.setCurrentMasterTenant($routeParams.masterTenantID);
     $scope.currentMasterTenant = MasterTenant.getCurrentMasterTenant();
@@ -193,8 +228,20 @@ ctrl.controller('CatalogController', ['$scope','$http','$routeParams','MasterTen
     });
 }]);
 
-ctrl.controller('MasterTenantController', ['$scope', '$http','$routeParams', '$firebase', 'MasterTenant', 'TenantList', 'Orders', function($scope, $http, $routeParams, $firebase, MasterTenant, TenantList, Orders) {
+ctrl.controller('MasterTenantController', ['$scope', '$http','$routeParams', '$firebase', 'MasterTenant', 'TenantList', 'Orders', 'Users', function($scope, $http, $routeParams, $firebase, MasterTenant, TenantList, Orders, Users) {
+    $scope.currentMasterTenantID = $routeParams.masterTenantID;
+    $scope.currentUserID = $routeParams.userID;
+    $scope.currentUser = Users.getCurrentUser();
     $scope.orders = Orders.getOrders();
+
+    if (!$scope.currentUser.id) {
+        $http.get('../api/getUser.php?id='+$routeParams.userID).success(function(response) {
+            Users.setCurrentUser(response);
+            $scope.currentUser = Users.getCurrentUser();
+        });
+    };
+    
+
     $scope.getOrders = function() {
        $http.get('../api/getOrders.php?masterTenantID='+$routeParams.masterTenantID).success(function(data) {
             console.log('order data', data);
@@ -232,6 +279,8 @@ ctrl.controller('MasterTenantController', ['$scope', '$http','$routeParams', '$f
 }]);
 
 ctrl.controller('TenantController', ['$scope', '$routeParams', '$firebase','$http', 'Tenant', 'MasterTenant', 'Catalog','TenantCatalog', function($scope, $routeParams, $firebase, $http, Tenant, MasterTenant, Catalog, TenantCatalog) {
+    $scope.currentMasterTenantID = $routeParams.masterTenantID;
+    $scope.currentUserID = $routeParams.userID;
     $http.get('getMTInfo.php?masterTenantID='+$routeParams.masterTenantID).success(function(data) {
         //console.log('mt catalog', data);
         if (data.defaultCatalog == true) {

@@ -46,7 +46,11 @@
 
     {{ addServiceForm }}
     <div class="form-group">
-        <a href="#/catalog/add-service-summary" class="btn btn-primary btn-block" ng-click="setNewServiceData(addServiceForm)">Next</a>
+        <a href="#{{currentBrokerID}}/{{currentUserID}}/catalog/add-service-summary" class="btn btn-primary btn-block" ng-click="setNewServiceData(addServiceForm)">Next</a>
+    </div>
+
+    <div class="form-group">
+        <a href="#{{currentBrokerID}}/{{currentUserID}}/catalog" class="btn btn-primary btn-block">Cancel</a>
     </div>
 </form>
 

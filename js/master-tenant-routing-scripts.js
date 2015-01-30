@@ -3,48 +3,58 @@ var app = angular.module('CloudMatrix', ['ngRoute', 'MasterTenantControllers']);
 app.config(['$routeProvider', function($routeProvider){
     $routeProvider
 
-    .when('/:masterTenantID', {
+    .when('/:masterTenantID/:userID', {
         templateUrl: 'main.html',
         controller: 'MasterTenantController'
     })
 
-    .when('/:masterTenantID/tenants', {
+    .when('/:masterTenantID/:userID/tenants', {
         templateUrl: 'main.html',
         controller: 'MasterTenantController'
     })
 
-    .when('/:masterTenantID/create-tenant', {
+    .when('/:masterTenantID/:userID/create-tenant', {
         templateUrl: 'create-tenant.html',
         controller: 'TenantController'
     })
 
-    .when('/:masterTenantID/create-tenant-catalog', {
+    .when('/:masterTenantID/:userID/create-tenant-catalog', {
         templateUrl: 'create-tenant-catalog.html',
         controller: 'TenantController'
     })
 
-    .when('/:masterTenantID/create-tenant-summary', {
+    .when('/:masterTenantID/:userID/create-tenant-summary', {
         templateUrl: 'create-tenant-summary.html',
         controller: 'TenantController'
     })
 
-    .when('/:masterTenantID/linked-tenant-details/:linkedTenantID', {
+    .when('/:masterTenantID/:userID/linked-tenant-details/:linkedTenantID', {
         templateUrl: 'linked-tenant-details.html',
         controller: 'LinkedTenantDetailsController'
     })
 
-    .when('/:masterTenantID/catalog', {
+    .when('/:masterTenantID/:userID/catalog', {
         templateUrl: 'catalog.html',
         controller: 'CatalogController'
     })
 
-    .when('/:masterTenantID/linked-tenants-list', {
+    .when('/:masterTenantID/:userID/linked-tenants-list', {
         templateUrl: 'linked-tenants-list.html',
         controller: 'LinkedTenantsList'
     })
 
-    .when('/:masterTenantID/orders', {
+    .when('/:masterTenantID/:userID/orders', {
         templateUrl: 'orders.html',
         controller: 'OrderController'
+    })
+
+    .when('/:masterTenantID/:userID/admin/users', {
+        templateUrl: 'users.html',
+        controller: 'AdministrationController'
+    })
+
+    .when('/:masterTenantID/:userID/admin/users/add-user', {
+        templateUrl: 'add-user.html',
+        controller: 'AdministrationController'
     })
 }]);
