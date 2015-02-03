@@ -1,4 +1,5 @@
 <!-- Catalog Controller broker-controllers.js -->
+<div ng-include="'header.html'"></div>
 <h3><a href="#/{{currentBrokerID}}/{{currentUserID}}">Broker Portal</a> - Manage Default Catalog</h3>
 <div><a href="#/{{currentBrokerID}}/{{currentUserID}}/create-master-tenant">Create Master Tenant</a></div>
 <div><a href="#/{{currentBrokerID}}/{{currentUserID}}/catalog">Add Provider</a></div>
@@ -11,8 +12,8 @@
         <input type="search" class="form-control" placeholder="Search Services" ng-model="searchText">
     </form>
 </div>
-<div ng-repeat="service in catalog.services | filter: searchText" ng-click="showDetails(service)">
+<div ng-repeat="service in catalog.services | filter: searchText" ng-click="showDetails(service)" class="list">
     <div ng-repeat="provider in catalog.providers"><img ng-show="service.providerID == provider.id" ng-src="{{provider.icon}}"></div>
-    <div>{{ service.name }}</div>
-    <div>{{ service.description }}</div>
+    <div class="list-header">{{ service.name }}</div>
+    <div class="list-text">{{ service.description }}</div>
 </div>

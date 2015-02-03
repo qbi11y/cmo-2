@@ -101,7 +101,7 @@ ctrl.controller('CreateMasterTenantController', ['$scope', '$http','$routeParams
         $http.post('../api/createNewMasterTenant.php', NewMasterTenant.getNewMasterTenant())
 
         .success(function (data) {
-            //console.log('new master tenant ', data);
+            console.log('new master tenant ', data);
         });
     };
 
@@ -117,11 +117,62 @@ ctrl.controller('CreateMasterTenantController', ['$scope', '$http','$routeParams
 Controller to handle the adding of new services to the catalog
 */
 ctrl.controller('AddServiceController', ['$scope', '$http', '$routeParams', 'NewServiceData','Catalog', function($scope, $http, $routeParams, NewServiceData, Catalog) {
+    $scope.currentInputStep = '';
+    $scope.showQuestions = true;
     $scope.currentBrokerID = $routeParams.brokerID;
     $scope.currentUserID = $routeParams.userID;
     $scope.providers = [];
     $scope.addServiceForm = {};
     $scope.newServiceData = NewServiceData.getNewServiceData();
+    $scope.defineService = {};
+    $scope.attribute = {};
+    $scope.customAttributes = [];
+
+    $scope.enableContinue = function() {
+        if ($scope.defineService.provider && $scope.defineService.locations && $scope.defineService.solutionCenter && $scope.defineService.marketplace && $scope.defineService.dependency && $scope.defineService.type != 'select') {
+            return true
+        }
+    }
+    $scope.createAttribute = function(data) {
+        var customAttribute = {};
+        for (var n in data) {
+            console.log('key ',n);
+            customAttribute[n] = data[n];
+        }
+        
+        if (data.inputType == 'select') {
+            customAttribute.selectOptions = data.selectOptions.split(",");
+            console.log('parse out select', data.attributeSelectOptions);
+        }
+        $scope.customAttributes.push(customAttribute);
+        $scope.attribute = {};
+    }
+
+    $scope.hideQuestions = function() {
+        $scope.showQuestions = false;
+        if ($scope.defineService.marketplace == 'yes') {
+            console.log('marketplace checked');
+            $scope.addServiceForm.enableMarketplace = true;
+        }
+
+        if ($scope.defineService.solutionCenter == 'yes') {
+            $scope.addServiceForm.enableSolutionCenter = true;
+        }
+        $scope.currentInputStep = 'information';
+    }
+
+    $scope.updateStep = function(step) {
+        console.log('market ', $scope.defineService.marketplace )
+        
+
+        if (step == 'dependency' && $scope.defineService.dependency == 'no') {
+            $scope.currentInputStep = 'summary';
+        } else {
+            $scope.currentInputStep = step;
+        }
+        console.log('current step - ', $scope.currentInputStep, 'dependency - ', $scope.defineService.dependency, 'type - ', $scope.defineService.type);
+        
+    }
     $scope.createNewDefaultCatalogService = function() {
         console.log('new service data', NewServiceData.getNewServiceData());
 

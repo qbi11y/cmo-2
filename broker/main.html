@@ -1,8 +1,9 @@
 <!-- Broker Controller  broker-controller.js-->
 <div ng-include="'header.html'"></div>
 <h3>Broker Portal</h3>
-<div><a href="#{{currentBrokerID}}/{{currentUserID}}/master-tenant-list">View Master Tenants</a></div>
-<div><a href="#/{{currentBrokerID}}/{{currentUserID}}/admin/users">Customer Administration</a></div>
+<div><a href="#{{currentBrokerID}}/{{currentUserID}}/master-tenant-list">Master Tenant Administration</a></div>
+<div><a href="#{{currentBrokerID}}/{{currentUserID}}/master-tenant-list">Linked Tenant Administration</a></div>
+<div><a href="#/{{currentBrokerID}}/{{currentUserID}}/admin/users">Operator Administration</a></div>
 <div>Ordering</div>
 <div>Billing</div>
 <div>View as Customer</div>
@@ -14,4 +15,5 @@
 <div>Portal Notifications</div>
 <div>Budget Management</div>
 <div>Platform Administration</div>
+<div>Security / Manage SSH Keys (Josh)</div>
 <div><a href="#{{currentBrokerID}}/{{currentUserID}}/catalog">Manage Default Catalog</a></div>

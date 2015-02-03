@@ -1,25 +1,47 @@
 <form role="form">
     <div class="form-group">
-        <label for="mt-name">Linked Tenant Name</label>
+        <label for="mt-name">*Linked Tenant / Customer Name</label>
         <input type="text" class="form-control" id="mt-name" placeholder="Enter linked tenant name" ng-model="tenantForm.accountName">
     </div>
 
     <div class="form-group">
-        <label for="mt-name">More Info</label>
-        <input type="text" class="form-control" id="mt-moreInfo" placeholder="Enter account name" ng-model="tenantForm.moreInfo">
-    </div>
-
-    <div class="form-group">
-        <label for="mt-name">More Stuff</label>
+        <label for="mt-name">Description</label>
         <input type="text" class="form-control" id="mt-moreStuff" placeholder="Enter account name" ng-model="tenantForm.moreStuff">
     </div>
     <div class="form-group">
-        <label for="mt-name">Last</label>
+        <label for="mt-name">Subscription Level</label>
+        <select class="form-control">
+            <option>Broker</option>
+            <option>Broker</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="mt-name">Payment Verified - checkbox</label>
         <input type="text" class="form-control" id="mt-moreStuff" placeholder="Enter account name" ng-model="tenantForm.last">
     </div>
 
     <div class="form-group">
-        <a href="#/{{currentMasterTenant}}/create-tenant-catalog" class="btn btn-primary btn-block" ng-click="setTenant()">Next</a>
+        <label for="mt-name">Parent Customer</label>
+        <select class="form-control">
+            <option>domain1.com</option>
+            <option>domain2.com</option>
+            <option>domain3.com</option>
+            <option>domain4.com</option>
+            <option>domain5.com</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <div class="checkbox">
+            <label for="mt-name">
+                <input type="checkbox">Add New Parent Customer
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <a href="#/{{currentMasterTenant}}/{{currentUserID}}/create-tenant-catalog" class="btn btn-primary btn-block" ng-click="setTenant()">Next</a>
     </div>
 </form>
 

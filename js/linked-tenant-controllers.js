@@ -10,12 +10,12 @@ ctrl.controller('LinkedTenantController', ['$scope', '$http','$routeParams', 'Us
         $http.get('../api/getUser.php?id='+user).success(function(response) {
             Users.setUser(response);
             $scope.currentUser = Users.getUser();
-            console.log('user', response);
+            console.log('user', $scope.currentUser);
         });
     }
 
     if (!$scope.currentUser.id) {
-        $scope.getUser($scope.currentUserID);
+        $scope.currentUser = Users.getUser($scope.currentUserID);
     }
 }]);
     

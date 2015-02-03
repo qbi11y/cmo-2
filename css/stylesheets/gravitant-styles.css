@@ -22,53 +22,54 @@
   border-top: 2px solid white;
   vertical-align: top;
   position: relative;
+  padding: 4em 0;
 }
 
-/* line 25, ../sass/gravitant-styles.scss */
+/* line 26, ../sass/gravitant-styles.scss */
 .list-header {
   font-size: 1.5em;
 }
 
-/* line 29, ../sass/gravitant-styles.scss */
+/* line 30, ../sass/gravitant-styles.scss */
 .list img {
   max-width: 200px;
 }
 
-/* line 33, ../sass/gravitant-styles.scss */
+/* line 34, ../sass/gravitant-styles.scss */
 .list-logo {
   min-height: 6em;
 }
 
-/* line 37, ../sass/gravitant-styles.scss */
+/* line 38, ../sass/gravitant-styles.scss */
 .list-text {
   min-height: 5em;
   color: #7d7d7d;
 }
 
 /* end styles for list/grid view */
-/* line 44, ../sass/gravitant-styles.scss */
+/* line 45, ../sass/gravitant-styles.scss */
 .compare-item {
   width: 100px;
   display: inline-block;
 }
 
-/* line 49, ../sass/gravitant-styles.scss */
+/* line 50, ../sass/gravitant-styles.scss */
 .compare-item img {
   width: 100px;
 }
 
 @media screen and (min-width: 480px) {
-  /* line 55, ../sass/gravitant-styles.scss */
+  /* line 56, ../sass/gravitant-styles.scss */
   .phone-active {
     display: none;
   }
 
-  /* line 58, ../sass/gravitant-styles.scss */
+  /* line 59, ../sass/gravitant-styles.scss */
   .phone-disabled {
     display: block;
   }
 
-  /* line 61, ../sass/gravitant-styles.scss */
+  /* line 62, ../sass/gravitant-styles.scss */
   .grid {
     display: inline-block;
     width: 47%;
@@ -77,28 +78,28 @@
     margin-bottom: 3em;
   }
 
-  /* line 68, ../sass/gravitant-styles.scss */
+  /* line 69, ../sass/gravitant-styles.scss */
   .item-overlay {
     display: none;
   }
 }
 @media screen and (min-width: 786px) {
-  /* line 74, ../sass/gravitant-styles.scss */
+  /* line 75, ../sass/gravitant-styles.scss */
   .phone-active, .desktop-disabled {
     display: none;
   }
 
-  /* line 77, ../sass/gravitant-styles.scss */
+  /* line 78, ../sass/gravitant-styles.scss */
   .hover {
     border-top: 2px solid red;
   }
 
-  /* line 80, ../sass/gravitant-styles.scss */
+  /* line 81, ../sass/gravitant-styles.scss */
   .phone-disabled {
     display: block;
   }
 
-  /* line 83, ../sass/gravitant-styles.scss */
+  /* line 84, ../sass/gravitant-styles.scss */
   .grid {
     display: inline-block;
     width: 31%;
@@ -107,7 +108,7 @@
     margin-bottom: 3em;
   }
 
-  /* line 90, ../sass/gravitant-styles.scss */
+  /* line 91, ../sass/gravitant-styles.scss */
   .item-overlay {
     display: block;
     position: absolute;
