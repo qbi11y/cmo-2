@@ -1,5 +1,18 @@
 var app = angular.module('Data', ['firebase']);
 
+app.factory('ListViews', function () {
+    var view = 'master';
+
+    return {
+        getView: function() {
+            return view
+        },
+        setView: function(newView) {
+            view = newView;
+        }
+    }
+})
+
 app.factory('Catalog', function() {
     var catalog;
 

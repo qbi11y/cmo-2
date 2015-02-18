@@ -1,4 +1,19 @@
 <!-- master tenant list controller -->
 <div ng-include="'header.html'"></div>
-<h3><a href="#/{{currentBrokerID}}/{{currentUserID}}">Broker Portal</a> - {{ masterTenantDetails.name }} Details</h3>
+<h3>{{ masterTenantDetails.name }} Details</h3>
+<div><a href="#/{{currentBrokerID}}/{{currentUserID}}/tenant-list">Back</a></div>
 <div>Link to Master Tenant: <a href="http://localhost/cmo-2/master-tenant/#/{{masterTenantDetails.id}}/1" target="blank">http://localhost/cmo-2/master-tenant/#/{{masterTenantDetails.id}}/1</a>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6 info-panel">Info</div>
+            <div class="col-md-6 info-panel">Info</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">sub info 1</div>
+    <div class="col-md-4">sub info 2</div>
+    <div class="col-md-4">sub info 3</div>
+</div>

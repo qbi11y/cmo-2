@@ -2,9 +2,57 @@ var ctrl = angular.module('BrokerControllers', ['Data']);
 /*
 any controllers for the main.html broker portal go here
 */
-ctrl.controller('BrokerController', ['$scope', '$http','$routeParams', function($scope, $http, $routeParams) {
+ctrl.controller('BrokerController', ['$scope', '$http','$routeParams', 'ListViews', 'Catalog', function($scope, $http, $routeParams, ListViews, Catalog) {
     $scope.currentBrokerID = $routeParams.brokerID;
     $scope.currentUserID = $routeParams.userID;
+    $scope.masterTenants = [];
+    $scope.linkedTenants = [];
+    $scope.catalog = [];
+    $scope.totalServices = 0;
+
+    $scope.getServiceCount = function(data) {
+        var providers = data.providers;
+        var services = data.services;
+        var catalog = [];
+        $scope.totalServices = services.length;
+
+        for (var i=0; i<providers.length; i++) {
+            var catalogItem = {};
+            var providerName = providers[i].name;
+            var providerServices = [];
+            for (var n=0; n<services.length; n++) {
+                if (providers[i].id == services[n].providerID) {
+                    providerServices.push(services[n]);
+                }                
+            }
+            catalogItem.providerName = providerName;
+            catalogItem.providerServices = providerServices;
+            catalog.push(catalogItem);
+        }
+        
+        Catalog.setCatalog(catalog);
+        $scope.catalog = Catalog.getCatalog();
+        console.log('catalog ', $scope.catalog);
+    }
+
+    $http.get('../api/getDefaultCatalog.php').success(function(response) {
+        $scope.getServiceCount(response);
+    });
+
+    $scope.setListView = function(view) {
+        ListViews.setView(view);
+    }
+
+    console.log('current broker', $scope.currentBrokerID);
+    $http.get('../api/getMasterTenants.php?brokerID='+$scope.currentBrokerID).success(function(response) {
+        console.log($scope.currentBrokerID);
+        console.log(response);
+        $scope.masterTenants = response;
+    });
+
+    $http.get('../api/getLinkedTenants.php?brokerID='+$scope.currentBrokerID).success(function(response) {
+        $scope.linkedTenants = response;
+    })
 
 }]);
 
@@ -44,16 +92,58 @@ ctrl.controller('AdministrationController', ['$scope', '$http', '$routeParams', 
 Controller for the master tenant list page
 Fetches the list of master tenants to display
 */
-ctrl.controller('MasterTenantListController', ['$scope', '$http','$routeParams', 'MasterTenantList','MasterTenantDetails', function($scope, $http, $routeParams, MasterTenantList, MasterTenantDetails) {
+ctrl.controller('TenantListController', ['$scope', '$http','$routeParams', 'MasterTenantList','MasterTenantDetails','ListViews', function($scope, $http, $routeParams, MasterTenantList, MasterTenantDetails, ListViews) {
     $scope.masterTenantList = [];
+    $scope.linkedTenantList = [];
     $scope.currentBrokerID = $routeParams.brokerID;
     $scope.currentUserID = $routeParams.userID;
+    $scope.tenantView = ListViews.getView();
+    $scope.hover = false;
+    $scope.deleteItem = {};
     
     //sends request for the master tenant list
-    $http.get('getMasterTenantList.php').success(function(data) {
+    console.log('get the master tenant list');
+    $http.get('../api/getMasterTenants.php?brokerID='+$scope.currentBrokerID).success(function(data) {
         MasterTenantList.setMasterTenantList(data);  //set the master tenant list data object
         $scope.masterTenantList = MasterTenantList.getMasterTenantList(); //set the master tenant list equal to the data object
-    });    
+    }); 
+
+    $http.get('../api/getLinkedTenants.php?brokerID='+$scope.currentBrokerID).success(function(response) {
+        $scope.linkedTenantList = response;
+    })
+
+    $scope.delete = function(item) {
+        $http.post('../api/deleteMasterTenant.php?masterTenantID='+item.id).success(function(response) {
+            console.log('delete', $scope.masterTenantList);
+            for (var i=0; i<$scope.masterTenantList.length; i++) {
+                if ($scope.masterTenantList[i].id == item.id ) {
+                    $scope.masterTenantList.splice(i, 1);
+                }
+            }
+
+        })
+    }  
+
+    $scope.setDeleteItem = function(item) {
+        $scope.deleteItem = item;
+    }
+
+    $scope.changeTenantView = function(view) {
+        $scope.tenantView = view;
+    } 
+
+    $scope.isHovered = function(data) {
+        return $scope.hover === data;
+    }
+
+    $scope.setHover = function(data, action) {
+        if (action == 'enter') {
+            $scope.hover = data;
+        } else {
+            $scope.hover = {};
+        }
+        
+    }
 }]);
 
 /*
@@ -84,9 +174,9 @@ Fetches all of the data for the default catalog to be displayed
 ctrl.controller('CatalogController', ['$scope', '$http', '$routeParams', 'Catalog', function($scope, $http, $routeParams, Catalog) {
     $scope.currentBrokerID = $routeParams.brokerID;
     $scope.currentUserID = $routeParams.userID;
-    $http.get('../api/getDefaultCatalog.php').success(function(data) {
-        console.log('php ', data);
-        Catalog.setCatalog(data);
+    $http.get('../api/getDefaultCatalog.php').success(function(response) {
+        console.log('php ', response);
+        Catalog.setCatalog(response);
         $scope.catalog = Catalog.getCatalog();
     });
     $scope.catalog = {};
@@ -116,7 +206,7 @@ ctrl.controller('CreateMasterTenantController', ['$scope', '$http','$routeParams
 /*
 Controller to handle the adding of new services to the catalog
 */
-ctrl.controller('AddServiceController', ['$scope', '$http', '$routeParams', 'NewServiceData','Catalog', function($scope, $http, $routeParams, NewServiceData, Catalog) {
+ctrl.controller('AddServiceController', ['$scope', '$http', '$routeParams', '$location', 'NewServiceData','Catalog', function($scope, $http, $routeParams, $location, NewServiceData, Catalog) {
     $scope.currentInputStep = '';
     $scope.showQuestions = true;
     $scope.currentBrokerID = $routeParams.brokerID;
@@ -127,9 +217,11 @@ ctrl.controller('AddServiceController', ['$scope', '$http', '$routeParams', 'New
     $scope.defineService = {};
     $scope.attribute = {};
     $scope.customAttributes = [];
+    $scope.catalog = Catalog.getCatalog();
+    console.log('current catalog', $scope.catalog);
 
     $scope.enableContinue = function() {
-        if ($scope.defineService.provider && $scope.defineService.locations && $scope.defineService.solutionCenter && $scope.defineService.marketplace && $scope.defineService.dependency && $scope.defineService.type != 'select') {
+        if ($scope.addServiceForm.providerID && /*$scope.addServiceForm.locations &&*/ $scope.addServiceForm.solutionCenter && $scope.addServiceForm.marketplace && /*$scope.addServiceForm.dependency &&*/ $scope.addServiceForm.type != 'select') {
             return true
         }
     }
@@ -150,12 +242,12 @@ ctrl.controller('AddServiceController', ['$scope', '$http', '$routeParams', 'New
 
     $scope.hideQuestions = function() {
         $scope.showQuestions = false;
-        if ($scope.defineService.marketplace == 'yes') {
+        if ($scope.addServiceForm.marketplace == 'yes') {
             console.log('marketplace checked');
             $scope.addServiceForm.enableMarketplace = true;
         }
 
-        if ($scope.defineService.solutionCenter == 'yes') {
+        if ($scope.addServiceForm.solutionCenter == 'yes') {
             $scope.addServiceForm.enableSolutionCenter = true;
         }
         $scope.currentInputStep = 'information';
@@ -173,12 +265,13 @@ ctrl.controller('AddServiceController', ['$scope', '$http', '$routeParams', 'New
         console.log('current step - ', $scope.currentInputStep, 'dependency - ', $scope.defineService.dependency, 'type - ', $scope.defineService.type);
         
     }
-    $scope.createNewDefaultCatalogService = function() {
-        console.log('new service data', NewServiceData.getNewServiceData());
+    $scope.createNewDefaultCatalogService = function(data) {
+        console.log('new service data', data);
 
-        if (NewServiceData.getNewServiceData().addProvider) {
-            $http.post('../api/createNewDefaultCatalogProvider.php', NewServiceData.getNewServiceData().addProvider).success(function (data) {
-                $scope.updateCatalog('provider',data);
+        if (data.addProvider) {
+            $http.post('../api/createNewDefaultCatalogProvider.php', data.addProvider).success(function (response) {
+                /*
+                $scope.updateCatalog('provider', response);
                 $scope.newServiceToUpdate = NewServiceData.getNewServiceData();
                 $scope.newServiceToUpdate.provider = data.id;
                 NewServiceData.setNewServiceData($scope.newServiceToUpdate);
@@ -186,16 +279,20 @@ ctrl.controller('AddServiceController', ['$scope', '$http', '$routeParams', 'New
                     console.log('added service and provider', data);
                     $scope.updateCatalog('service', data);
                 });
+                */
             });
+
         } else {
-            $http.post('../api/createNewDefaultCatalogService.php', NewServiceData.getNewServiceData()).success(function (data) {
-                console.log('added service', data);
-                $scope.updateCatalog('service', data);
+            $http.post('../api/createNewDefaultCatalogService.php', data).success(function (response) {
+                console.log('added service', response);
+                //$scope.updateCatalog('service', response);
+                $location.path('/'+$scope.currentBrokerID+'/'+$scope.currentUserID+'/catalog');
             })
         }
-    
     };
 
+
+    /*
     $scope.updateCatalog = function(type, data) {
         switch(type) {
             case 'provider':
@@ -213,6 +310,7 @@ ctrl.controller('AddServiceController', ['$scope', '$http', '$routeParams', 'New
         }        
         console.log('after update', Catalog.getCatalog());
     };
+    */
 
     $scope.setNewServiceData = function(data) {
         NewServiceData.setNewServiceData(data);

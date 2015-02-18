@@ -1,0 +1,98 @@
+<html lang="en" ng-app="CloudMatrix">
+<head>
+    <meta charset="UTF-8">
+    <title>Cloud Matrix</title>
+    <link rel="stylesheet" href="../packages/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/stylesheets/gravitant-styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body ng-controller="CMController">
+    <script type="text/javascript" src="../packages/angular/angular.min.js"></script> <!-- main angular file -->
+    <script src="../packages/angular-route/angular-route.js"></script><!-- angular route module -->
+    <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script><!-- Firebase -->
+    <script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script><!-- AngularFire -->
+    <script type="text/javascript" src="js/index.js"></script><!-- custom angular controllers -->
+
+    <div class="container">
+        <div id="brokerForm" ng-show="showBrokerForm">
+            <form role="form">
+                <div class="form-group">
+                    <label for="">Broker Name</label>
+                    <input class="form-control" type="text" placeholder="Enter Broker Name" ng-model="broker.brokerName">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Broker Admin First Name</label>
+                    <input class="form-control" type="text" placeholder="Enter First Name" ng-model="broker.firstName">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Broker Admin Last Name</label>
+                    <input class="form-control" type="text" placeholder="Enter Last Name" ng-model="broker.lastName">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Broker Admin Email</label>
+                    <input class="form-control" type="text" placeholder="Enter Email" ng-model="broker.email">
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="broker.createLinkedTenant">Create Linked Tenant
+                    </label>
+                </div>
+
+                <div ng-show="broker.createLinkedTenant == true">
+                    Would you like to associate the linked tenant to a master tenant?
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="masterTenant" ng-model="broker.createMasterTenant" value="yes" ng-init="broker.createMasterTenant = 'yes'">Yes (creates master tenant and associates the linked tenant to the master tenant)
+                        </label>
+                    </div>
+
+                    <div ng-show="broker.createMasterTenant == 'yes'">
+                        <div class="form-group">
+                            <label for="">Master Tenant Name</label>
+                            <input class="form-control" type="text" placeholder="Enter Master Tenant Name" ng-model="broker.masterTenantName">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Linked Tenant Name</label>
+                            <input class="form-control" type="text" placeholder="Enter Linked Tenant Name" ng-model="broker.linkedTenantName">
+                        </div>
+                    </div>
+
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="masterTenant" ng-model="broker.createMasterTenant" value="no">No ( Associates the linked tenant to the broker, therefore making the broker the master tenant)
+                        </label>
+                    </div>
+
+                    <div ng-show="broker.createMasterTenant == 'no'">
+
+                        <div class="form-group">
+                            <label for="">Linked Tenant Name</label>
+                            <input class="form-control" type="text" placeholder="Enter Linked Tenant Name" ng-model="broker.linkedTenantName">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <a href="" class="btn btn-primary btn-block" ng-class="{disabled: !broker.brokerName || !broker.firstName || !broker.lastName || !broker.email}" maxlength="255" ng-click="createBroker(broker)">Create Broker</a>
+                </div>
+            </form>
+        </div>
+        {{broker }}
+
+        <div id="brokerResponse" ng-show="!showBrokerForm">
+            <p>{{ broker.brokerName }} was successfully added.</p>
+            <p>{{ broker.firstName }} {{ broker.lastName }} was automatically associated with this broker account.</p> 
+            <p><a href="http://localhost/cmo-2/broker/#/{{user.brokerID}}/{{user.userID}}" target="blank">Visit {{ broker.brokerName }}'s admin portal</a></p>
+            <p><a href="http://localhost/cmo-2/broker/#/{{user.brokerID}}/{{user.userID}}" target="blank">http://localhost/cmo-2/broker/#/{{user.brokerID}}/{{user.userID}}</a></p>
+        </div>
+    </div> 
+    
+    <script type="text/javascript" src="../packages/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../packages/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

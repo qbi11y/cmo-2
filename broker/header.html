@@ -14,14 +14,21 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="">Marketplace<span class="sr-only">(current)</span></a></li>
-        <li><a href="">Cart <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span><span class="badge">{{ cartItems.length }}</span></a></li>
         <li class="dropdown">
           <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administration <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="" ng-show="currentUser.roleID == 1">Customer Administration</a></li>
-            <li><a href="#" ng-show="currentUser.roleID <= 2">Billing</a></li>
-            <li><a href="#" ng-show="currentUser.roleID <= 2">Monitoring</a></li>
+            <li><a href="#{{currentBrokerID}}/{{currentUserID}}/master-tenant-list">Linked Tenant Administration</a></li>
+            <li><a href="">Billing</a></li>
+            <li><a href="">View as Customer</a></li>
+            <li><a href="">monitoring</a></li>
+            <li><a href="">Provider Account Management</a></li>
+            <li><a href="">Pricing Rules</a></li>
+            <li><a href="">Policy Management</a></li>
+            <li><a href="">Budget Management</a></li>
+            <li><a href="">Portal Notifications</a></li>
+            <li><a href="">Budget Management</a></li>
+            <li><a href="">Platform Administration</a></li>
+            <li><a href="">Security / Manage SSH Keys (Josh)</a></li>
             <li class="divider"></li>
             <li><a href="#">Separated link</a></li>
             <li class="divider"></li>

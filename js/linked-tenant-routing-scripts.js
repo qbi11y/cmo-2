@@ -13,6 +13,11 @@ app.config(['$routeProvider', function($routeProvider){
         controller: 'StoreController'
     })
 
+    .when('/:linkedTenantID/:userID/theme-service-store', {
+        templateUrl: 'theme-services.html',
+        controller: 'StoreController'
+    })
+
     .when('/:linkedTenantID/:userID/service-store/configure-service/:serviceID', {
         templateUrl: 'services-configure.html',
         controller: 'ConfigureServiceController'

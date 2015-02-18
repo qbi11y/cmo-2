@@ -3,17 +3,28 @@
 <h3><a href="#/{{currentBrokerID}}/{{currentUserID}}">Broker Portal</a> - Manage Default Catalog</h3>
 <div><a href="#/{{currentBrokerID}}/{{currentUserID}}/create-master-tenant">Create Master Tenant</a></div>
 <div><a href="#/{{currentBrokerID}}/{{currentUserID}}/catalog">Add Provider</a></div>
-<div><a href="#/{{currentBrokerID}}/{{currentUserID}}/catalog/add-service">Add Service to Catalog</a></div>
 <div><a href="#/{{currentBrokerID}}/{{currentUserID}}/catalog">Add Cloud Instance</a></div>
 <div><a href="#/{{currentBrokerID}}/{{currentUserID}}/catalog">Add Location</a></div>
 
-<div>
-    <form>
-        <input type="search" class="form-control" placeholder="Search Services" ng-model="searchText">
-    </form>
+<div class="form-group input-group">
+    <input type="search" class="form-control" placeholder="Search Services" ng-model="searchText"><span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
 </div>
-<div ng-repeat="service in catalog.services | filter: searchText" ng-click="showDetails(service)" class="list">
-    <div ng-repeat="provider in catalog.providers"><img ng-show="service.providerID == provider.id" ng-src="{{provider.icon}}"></div>
-    <div class="list-header">{{ service.name }}</div>
-    <div class="list-text">{{ service.description }}</div>
+
+<div><a href="#/{{currentBrokerID}}/{{currentUserID}}/catalog/add-service" class="btn btn-primary">Add Service to Catalog</a></div>
+
+<div ng-repeat="service in catalog.services | filter: searchText" ng-click="showDetails(service)" class="row list">
+    <div class="col-md-6">
+        <div ng-repeat="provider in catalog.providers"><img ng-show="service.providerID == provider.id" ng-src="{{provider.icon}}"></div>
+        <div class="list-header">{{ service.name }}</div>
+        <div class="list-text">{{ service.description }}</div>
+    </div>
+    <div class="col-md-3 text-right">
+        <h4>Total Instances</h4>
+        <h2>{{ 150 * ((3.14 * $index) +1) | number : 0 }}</h2>
+    </div>
+
+    <div class="col-md-3 text-right">
+        <h4>Current Charges</h4>
+        <h2>{{ 2500 * ((3.14 * $index) +1) | currency }}</h2>
+    </div>
 </div>

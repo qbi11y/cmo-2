@@ -1,26 +1,26 @@
 <!-- MasterTenantController broker-controllers.js -->
-<h3>Broker Portal - Add Service to Default Catalog</h3>
-step {{currentInputStep}}
-
 <div class="row">
     <div class="col-md-2 col-lg-1"></div>
     <div class="col-md-8 col-lg-10">
+
+        <!-- initial questionaire to determine what fields to show in the wizard -->
         <div class="well well-lg" ng-show="showQuestions == true">
             <h4>Getting Started</h4>
             <form role="form">
                 <div class="form-group">
                     <label>What type of service are you importing?</label>
-                    <select class="form-control" ng-model="defineService.type" ng-init="defineService.type = 'select'">
+                    <select class="form-control" ng-model="addServiceForm.type" ng-init="addServiceForm.type = 'select'">
                         <option value="select">Select Service Type</option>
                         <option value="vm">VM Add On Service</option>
                         <option value="solutionprint">Solution Print Service</option>
                         <option value="blueprint">Blueprint Service</option>
+                        <option value="blueprint">Managed Service</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="provider">Which provider will host the service?</label>
-                    <select class="form-control" ng-model="defineService.provider" ng-init="defineService.provider = -1">
+                    <select class="form-control" ng-model="addServiceForm.providerID" ng-init="addServiceForm.providerID = -1">
                         <option selected value="-1">Select Provider</option>
                         <option ng-repeat="provider in providers" value="{{provider.id}}">{{ provider.name }}</option>
                         <option value="0">Add New Provider</option>
@@ -28,7 +28,7 @@ step {{currentInputStep}}
                 </div>
 
                 <!-- display only if user needs to add a provider -->
-                <div ng-show="defineService.provider == 0">
+                <div ng-show="addServiceForm.providerID == 0">
                     <div class="form-group">
                         <label for="providerName">Provider Name</label>
                         <input type="text" class="form-control" placeholder="Enter providers name" ng-model="addServiceForm.addProvider.providerName">
@@ -50,9 +50,12 @@ step {{currentInputStep}}
                     </div>
                 </div>
 
-                <div class="form-group">
+
+                <!-- look into removing  and adding to appropriate screen -->
+                
+                <!--<div class="form-group">
                     <label for="provider">Which location(s) will host the service?</label>
-                    <select multiple class="form-control" ng-model="defineService.locations" size="6">
+                    <select multiple class="form-control" ng-model="addServiceForm.locations" size="6">
                         <option selected value="-1">Select Location</option>
                         <option value="0">All Locations</option>
                         <option value="1">Location 1</option>
@@ -62,31 +65,19 @@ step {{currentInputStep}}
                         <option value="5">Location 5</option>
                     </select>
                 </div>
-
-                <div class="form-group">
-                    <label>Does the service require another service to run properly?</label>
-                    <div class="radio">
-                        <label for="startingPrice">
-                            <input type="radio"  name="dependency" ng-model="defineService.dependency" value="yes">Yes</input>
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label for="startingPrice">
-                            <input type="radio"  name="dependency" ng-model="defineService.dependency" value="no">No
-                        </label>
-                    </div>
-                </div>
+                -->
+                
 
                 <div class="form-group">
                     <label>Does the service need to be enabled for the marketplace?</label>
                     <div class="radio">
                         <label for="startingPrice">
-                            <input type="radio"  name="marketplace" ng-model="defineService.marketplace" value="yes">Yes
+                            <input type="radio"  name="marketplace" ng-model="addServiceForm.marketplace" value="yes">Yes
                         </label>
                     </div>
                     <div class="radio">
                         <label for="startingPrice">
-                            <input type="radio"  name="marketplace" ng-model="defineService.marketplace" value="no">No
+                            <input type="radio"  name="marketplace" ng-model="addServiceForm.marketplace" value="no">No
                         </label>
                     </div>
                 </div>
@@ -95,12 +86,12 @@ step {{currentInputStep}}
                     <label>Does the service need to be enabled for the solution center?</label>
                     <div class="radio">
                         <label for="startingPrice">
-                            <input type="radio"  name="solutioncenter" ng-model="defineService.solutionCenter" value="yes">Yes</input>
+                            <input type="radio"  name="solutioncenter" ng-model="addServiceForm.solutionCenter" value="yes">Yes</input>
                         </label>
                     </div>
                     <div class="radio">
                         <label for="startingPrice">
-                            <input type="radio"  name="solutioncenter" ng-model="defineService.solutionCenter" value="no">No
+                            <input type="radio"  name="solutioncenter" ng-model="addServiceForm.solutionCenter" value="no">No
                         </label>
                     </div>
                 </div>
@@ -125,9 +116,9 @@ step {{currentInputStep}}
                     <label for="provider">Offering Type</label>
                     <select class="form-control" ng-model="addServiceForm.serviceOffering" ng-init="addServiceForm.serviceOffering = -1">
                         <option selected value="-1">Select Offering Type</option>
-                        <option value="1">Iaas</option>
-                        <option value="2">Paas</option>
-                        <option value="3">Saas</option>
+                        <option value="1">Iaas (Infrastructure as a Service)</option>
+                        <option value="2">Paas (Platform as a Service)</option>
+                        <option value="3">Saas (Software as a Service)</option>
                         <option value="4">Managed Services</option>
                         <option value="5">Portal Subscription</option>
                     </select>
@@ -149,6 +140,11 @@ step {{currentInputStep}}
                 <div class="form-group">
                     <label for="startingPrice">State</label>
                     <input type="text" class="form-control" placeholder="Enter state" ng-model="addServiceForm.state">
+                </div>
+
+                <div class="form-group">
+                    <label for="startingPrice">Starting Price</label>
+                    <input type="number" class="form-control" placeholder="Enter starting price" ng-model="addServiceForm.startingPrice">
                 </div>
 
                 <div class="form-group">
@@ -192,12 +188,12 @@ step {{currentInputStep}}
 
                 <div class="form-group">
                     <label for="startingPrice">Service Publisher</label>
-                    <input type="number" class="form-control" placeholder="Enter service publisher" ng-model="addServiceForm.publisher">
+                    <input type="text" class="form-control" placeholder="Enter service publisher" ng-model="addServiceForm.publisher">
                 </div>
 
                 <div class="form-group">
                     <label for="serviceDescription">Default Access URL</label>
-                    <input type="number" class="form-control" placeholder="Enter default access url" ng-model="addServiceForm.accessURL">
+                    <input type="url" class="form-control" placeholder="Enter default access url" ng-model="addServiceForm.accessURL">
                 </div>
 
                 <div class="form-group">
@@ -221,7 +217,7 @@ step {{currentInputStep}}
                 </div>
 
                 <div class="form-group">
-                    <label for="serviceDescription">Search Keywords</label>
+                    <label for="serviceDescription">Search Keywords (separate by comma)</label>
                     <textarea class="form-control" ng-model="addServiceForm.keywords"></textarea>
                 </div>
 
@@ -252,7 +248,7 @@ step {{currentInputStep}}
                     <a href="#{{currentBrokerID}}/{{currentUserID}}/catalog" class="btn btn-primary btn-block">Cancel</a>
                 </div>
             </div>
-            <div ng-show="currentInputStep == 'type' &&  defineService.type == 'vm'" class="well well-lg">
+            <div ng-show="currentInputStep == 'type' &&  addServiceForm.type == 'vm'" class="well well-lg">
                 <h4>VM Add On Service</h4><hr>
                 <div class="form-group">
                     <label>Is a VM Required?</label>
@@ -307,11 +303,11 @@ step {{currentInputStep}}
             </div>
             </div>
 
-            <div ng-show="currentInputStep == 'type' &&  defineService.type == 'solutionprint'" class="well well-lg">
+            <div ng-show="currentInputStep == 'type' &&  addServiceForm.type == 'solutionprint'" class="well well-lg">
                 <h4>Solution Print Service</h4><hr>
                 <div class="form-group">
                     <label for="serviceDescription">Solution Print File Name</label>
-                    <input type="text" class="form-control" placeholder="Enter starting price" ng-model="addServiceForm.solutionPrintFile">
+                    <input type="text" class="form-control" placeholder="Enter path to solution print file name" ng-model="addServiceForm.solutionPrintFile">
                 </div>
 
                 <div class="form-group">
@@ -346,7 +342,7 @@ step {{currentInputStep}}
             </div>
             </div>
 
-            <div ng-show="currentInputStep == 'type' &&  defineService.type == 'blueprint'" class="well well-lg">
+            <div ng-show="currentInputStep == 'type' &&  addServiceForm.type == 'blueprint'" class="well well-lg">
                 <h4>Blue Print Service</h4><hr>
                 <div class="form-group">
                     <label for="serviceDescription">Blue Print Payload File Name</label>
@@ -385,8 +381,27 @@ step {{currentInputStep}}
             </div>
             </div>
 
-            <div ng-show="currentInputStep == 'dependency' && defineService.dependency == 'yes'" class="well well-lg">
+            <div ng-show="currentInputStep == 'dependency'" class="well well-lg">
                 <h4>Service Dependency</h4><hr>
+                
+                <div class="form-group">
+                    <label>Does the service require another service to run properly?</label>
+                    <div class="radio">
+                        <label for="startingPrice">
+                            <input type="radio"  name="dependency" ng-model="addServiceForm.dependency" value="yes">Yes</input>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label for="startingPrice">
+                            <input type="radio"  name="dependency" ng-model="addServiceForm.dependency" value="no">No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-show="addServiceForm.dependency == 'yes'">
+                    Dependency items here
+                </div>
+            
                 <div class="form-group">
                     <a href="" class="btn btn-primary btn-block" ng-click="updateStep('type')">Back</a>
                 </div>
@@ -449,6 +464,12 @@ step {{currentInputStep}}
                 </div>
                 <div class="form-group">
                     <label>What kind of input will this accept?</label>
+                    <div class="radio">
+                        <label for="date">
+                            <input type="radio" name="date" ng-model="attribute.inputType" value="type">Date</input>
+                        </label>
+                    </div>
+
                     <div class="radio">
                         <label for="startingPrice">
                             <input type="radio" name="vdc" ng-model="attribute.inputType" value="text">Short Text (text field)</input>
@@ -528,11 +549,105 @@ step {{currentInputStep}}
 
             <div ng-show="currentInputStep == 'summary'" class="well well-lg">
                 <h4>Summary</h4><hr>
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Service Offering</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.serviceOffering }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Service Type</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.serviceType }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Service Categories</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.serviceCategory }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Solution Print Provider</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.solutionPrintProvider }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Solution Print Location</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.solutionPrintLocation }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Blueprint Provider</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.blueprintProvider }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Available for Marketplace Consumption</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.enableMarketplace }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Available for Solution Center Consumption</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.enableMarketplace }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Service Name</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.serviceName }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">State</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.state }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Publisher</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.publisher }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Access URL</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.accessURL }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Short Description</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.shortDescription }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Long Description</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.longDescription }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">HTML Description</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.html }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Terms and Conditions</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.termsconditions }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Available for Marketplace Consumption</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.enableMarketplace }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Search Keywords</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.keywords }}</div>
+                </div>
+
+                <div class="row text-list">
+                    <div class="col-md-6 text-list-key">Solution Print File</div>
+                    <div class="col-md-6 text-list-value">{{ addServiceForm.solutionPrintFile }}</div>
+                </div>
                 <div class="form-group">
                     <a href="" class="btn btn-primary btn-block" ng-click="updateStep('dependency')">Back</a>
                 </div>
                 <div class="form-group">
-                    <a href="" class="btn btn-primary btn-block">Finish</a>
+                    <a href="" class="btn btn-primary btn-block" ng-click="createNewDefaultCatalogService(addServiceForm)">Finish</a>
                 </div>
                 <div class="form-group">
                 <a href="#{{currentBrokerID}}/{{currentUserID}}/catalog" class="btn btn-primary btn-block">Cancel</a>

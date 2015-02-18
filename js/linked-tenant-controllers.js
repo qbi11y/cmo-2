@@ -92,7 +92,15 @@ ctrl.controller('ServiceDetailsController', ['$scope', '$http', '$routeParams','
     $scope.currentLinkedTenantID = $routeParams.linkedTenantID;
 }])
 
-ctrl.controller('StoreController', ['$scope', '$http', '$routeParams', 'Catalog', 'Configure','Service', 'Users', 'Cart', function($scope, $http, $routeParams, Catalog, Configure, Service, Users, Cart) {
+ctrl.controller('StoreController', ['$scope', '$http', '$routeParams','$location', 'Catalog', 'Configure','Service', 'Users', 'Cart', function($scope, $http, $routeParams, $location, Catalog, Configure, Service, Users, Cart) {
+    
+    $scope.theme = function() {
+        if ($location.path() == '/79/11/service-store') {
+           return true 
+        } else {
+            return false
+        }
+    }
     $scope.cartItems = Cart.getCart();
     $scope.providerFilter = [];
     $scope.currentUser = Users.getUser();

@@ -3,6 +3,11 @@ var app = angular.module('CloudMatrix', ['ngRoute', 'BrokerControllers']);
 app.config(['$routeProvider', function($routeProvider){
     $routeProvider
 
+    .when('/' , {
+        templateUrl: 'main.html',
+        controller: 'BrokerController'
+    })
+
     .when('/:brokerID/:userID', {
         templateUrl: 'main.html',
         controller: 'BrokerController'
@@ -33,9 +38,9 @@ app.config(['$routeProvider', function($routeProvider){
         controller: 'AddServiceController'
     })
 
-    .when('/:brokerID/:userID/master-tenant-list',  {
-        templateUrl: 'master-tenant-list.html',
-        controller: 'MasterTenantListController'
+    .when('/:brokerID/:userID/tenant-list',  {
+        templateUrl: 'tenant-list.html',
+        controller: 'TenantListController'
     })
 
     .when('/:brokerID/:userID/master-tenant-details/:masterTenantID', {

@@ -1,19 +1,74 @@
 <!-- Broker Controller  broker-controller.js-->
 <div ng-include="'header.html'"></div>
-<h3>Broker Portal</h3>
-<div><a href="#{{currentBrokerID}}/{{currentUserID}}/master-tenant-list">Master Tenant Administration</a></div>
-<div><a href="#{{currentBrokerID}}/{{currentUserID}}/master-tenant-list">Linked Tenant Administration</a></div>
-<div><a href="#/{{currentBrokerID}}/{{currentUserID}}/admin/users">Operator Administration</a></div>
-<div>Ordering</div>
-<div>Billing</div>
-<div>View as Customer</div>
-<div>monitoring</div>
-<div>Provider Account Management</div>
-<div>Pricing Rules</div>
-<div>Policy Management</div>
-<div>Budget Management</div>
-<div>Portal Notifications</div>
-<div>Budget Management</div>
-<div>Platform Administration</div>
-<div>Security / Manage SSH Keys (Josh)</div>
-<div><a href="#{{currentBrokerID}}/{{currentUserID}}/catalog">Manage Default Catalog</a></div>
+<div class="row">
+    <div class="col-md-4 info-panel">
+        <div><h3>Tenants</h3></div>
+        <div>
+            <div class="row">
+                <div class="col-md-6">Total Master Tenants:</div>
+                <div class="col-md-6"><a href="#{{currentBrokerID}}/{{currentUserID}}/tenant-list"  ng-click="setListView('master')">{{ masterTenants.length }}</a></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12"><a href="#{{currentBrokerID}}/{{currentUserID}}/tenant-list">Master Tenant Administration</a></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">Total Linked Tenants:</div>
+                <div class="col-md-6"><a href="#{{currentBrokerID}}/{{currentUserID}}/tenant-list" ng-click="setListView('linked')">{{ linkedTenants.length }}</a></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12"><a href="#{{currentBrokerID}}/{{currentUserID}}/tenant-list">Linked Tenant Administration</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 info-panel">
+        <div><h3>Orders</h3></div>
+        <div>
+            <div class="row">
+                <div class="col-md-6">Total:</div>
+                <div class="col-md-6"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">New:</div>
+                <div class="col-md-6">12</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">In Progress:</div>
+                <div class="col-md-6">33</div>
+            </div>
+
+            <div class="row bottom">
+                <div class="col-md-12"><a href="">Go to Ordering</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 info-panel">
+        <div><h3>Services</h3></div>
+        <div>
+            <div class="row">
+                <div class="col-md-6">Total:</div>
+                <div class="col-md-6">{{ totalServices }}</div>
+            </div>
+
+            <div class="row" ng-repeat="item in catalog" ng-show="item.providerServices.length > 0">
+                <div class="col-md-6">{{item.providerName}}</div>
+                <div class="col-md-6">{{item.providerServices.length}}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12"><a href="#{{currentBrokerID}}/{{currentUserID}}/catalog">Manage Default Catalog</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h4>Quick Links</h4>
+        <ul>           
+            <li><a href="#/{{currentBrokerID}}/{{currentUserID}}/admin/users">Operator Administration</a></li>
+        </ul>
+
+    </div>
+    <div class="col-md-8">Other Actions</div>
+</div>

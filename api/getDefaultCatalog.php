@@ -16,34 +16,33 @@ die('Connection failed: ' . mysql_error());
 
 mysql_select_db ($database) or die ('Cannot connect to the database: ' . mysql_error());
 
-//$data = file_get_contents("php://input");
-//$objData = json_decode($data);
-//@$id = $objData->id;
+$providers_query = mysql_query("SELECT * from providers") or die ('Query is invalid: ' . mysql_error());
 
-$provider_query = mysql_query("SELECT * from providers") or die ('Query is invalid: ' . mysql_error());
+while ($row = mysql_fetch_array($providers_query)) {
+    $provider = new stdClass();
+    $provider->id = $row['id'];
+    $provider->name = $row['name'];
+    $provider->icon = $row['icon'];
+    $provider->description = $row['description'];
+    array_push($providers, $provider);
+}
+
 $services_query = mysql_query("SELECT * from services") or die ('Query is invalid: ' . mysql_error());
 
-while ($row = mysql_fetch_array($provider_query)) {
-    $obj = new stdClass();
-    $obj->id = $row['id'];
-    $obj->name = $row['name'];
-    $obj->icon = $row['icon'];
-    $obj->description = $row['description'];
-    array_push($providers, $obj);
-}
-
 while ($row = mysql_fetch_array($services_query)) {
-    $obj = new stdClass();
-    $obj->id = $row['id'];
-    $obj->providerID = $row['providerID'];
-    $obj->name = $row['name'];
-    $obj->startingPrice = $row['startingPrice'];
-    $obj->description = $row['description'];
-    array_push($services, $obj);
+    $service = new stdClass();
+    $service->id = $row['id'];
+    $service->providerID = $row['providerID'];
+    $service->name = $row['name'];
+    $service->price = $row['price'];
+    $service->description = $row['shortDescription'];
+    $service->keywords = $row['keywords'];
+    array_push($services, $service);
 }
 
-$catalog->providers = $providers;
+
 $catalog->services = $services;
+$catalog->providers = $providers;
 
 echo json_encode($catalog);
 
