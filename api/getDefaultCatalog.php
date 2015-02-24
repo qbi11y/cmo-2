@@ -16,34 +16,23 @@ die('Connection failed: ' . mysql_error());
 
 mysql_select_db ($database) or die ('Cannot connect to the database: ' . mysql_error());
 
-$providers_query = mysql_query("SELECT * from providers") or die ('Query is invalid: ' . mysql_error());
 
-while ($row = mysql_fetch_array($providers_query)) {
-    $provider = new stdClass();
-    $provider->id = $row['id'];
-    $provider->name = $row['name'];
-    $provider->icon = $row['icon'];
-    $provider->description = $row['description'];
-    array_push($providers, $provider);
-}
+$defaultCatalog_query = mysql_query("SELECT t1.id AS providerID, t1.name AS providerName, t1.icon AS providerIcon, t1.providerURL, t2.id AS serviceID, t2.name AS serviceName, t2.price AS serviceStartingPrice, t2.shortDescription AS serviceShortDescription, t2.keywords AS serviceKeywords FROM providers AS t1 JOIN defaultServices AS t2 ON t1.id = t2.providerID ORDER BY t2.id DESC");
 
-$services_query = mysql_query("SELECT * from services") or die ('Query is invalid: ' . mysql_error());
-
-while ($row = mysql_fetch_array($services_query)) {
+while ($row = mysql_fetch_array($defaultCatalog_query)) {
     $service = new stdClass();
-    $service->id = $row['id'];
     $service->providerID = $row['providerID'];
-    $service->name = $row['name'];
-    $service->price = $row['price'];
-    $service->description = $row['shortDescription'];
-    $service->keywords = $row['keywords'];
+    $service->providerName = $row['providerName'];
+    $service->providerIcon = $row['providerIcon'];
+    $service->providerURL = $row['providerURL'];
+    $service->serviceID = $row['serviceID'];
+    $service->serviceName = $row['serviceName'];
+    $service->serviceStartingPrice = $row['serviceStartingPrice'];
+    $service->serviceShortDescription = $row['serviceShortDescription'];
+    $service->serviceKeywords = $row['serviceKeywords'];
     array_push($services, $service);
 }
 
-
-$catalog->services = $services;
-$catalog->providers = $providers;
-
-echo json_encode($catalog);
+echo json_encode($services);
 
 ?>

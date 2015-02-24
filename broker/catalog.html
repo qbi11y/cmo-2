@@ -12,11 +12,12 @@
 
 <div><a href="#/{{currentBrokerID}}/{{currentUserID}}/catalog/add-service" class="btn btn-primary">Add Service to Catalog</a></div>
 
-<div ng-repeat="service in catalog.services | filter: searchText" ng-click="showDetails(service)" class="row list">
+<div ng-repeat="service in defaultCatalog | filter: searchText" ng-click="showDetails(service)" class="row list">
     <div class="col-md-6">
-        <div ng-repeat="provider in catalog.providers"><img ng-show="service.providerID == provider.id" ng-src="{{provider.icon}}"></div>
-        <div class="list-header">{{ service.name }}</div>
-        <div class="list-text">{{ service.description }}</div>
+        <img ng-src="{{service.providerIcon}}">
+        <div class="list-header">{{ service.serviceName }}</div>
+        <div class="list-header">{{ service.providerName }}</div>
+        <div class="list-text">{{ service.serviceShortDescription }}</div>
     </div>
     <div class="col-md-3 text-right">
         <h4>Total Instances</h4>

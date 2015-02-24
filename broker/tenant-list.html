@@ -31,6 +31,7 @@
     </table>
 </div>
 
+{{linkedTenantList}}
 <div ng-show="tenantView == 'linked'">
     <h3>View LinkedTenants</h3> <span><button class="btn btn-primary" ng-click="changeTenantView('master')">View Master Tenants</button></span>
     <span><a href="#/{{currentBrokerID}}/{{currentUserID}}/create-master-tenant">Create Linked Tenant</a></span>
@@ -38,17 +39,19 @@
 
     <table class="table table-hover">
         <th>Linked Tenant Name</th>
+        <th>Portal Link</th>
         <th>Pending Orders</th>
         <th></th>
         <tr ng-repeat="lt in linkedTenantList | filter: searchText" ng-mouseenter="setHover(mt, 'enter')">
-            <td><a href="#/{{currentBrokerID}}/{{currentUserID}}/master-tenant-details/{{lt.id}}" ng-click="showMasterTenantDetails(mt)">{{lt.name}}</a></td>
+            <td><a href="#/{{currentBrokerID}}/{{currentUserID}}/linked-tenant-details/{{lt.linkedTenantID}}" ng-click="showTenantDetails(lt, 'linked')">{{lt.name}}</a></td>
+            <td><a href="http://localhost/cmo-2/linked-tenant/#/{{currentBrokerID}}/1" target="_blank">Website</a></td>
 
             <td>{{$index}}</td>
             <td>
                 <div ng-class="{active: isHovered(mt), inactive: !isHovered(mt)}">
-                    <a href="#/{{currentBrokerID}}/{{currentUserID}}/master-tenant-details/{{lt.id}}" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></a>
-                    <a href="#/{{currentBrokerID}}/{{currentUserID}}/master-tenant-details/{{lt.id}}?edit" class="glyphicon glyphicon-pencil" aria-hidden="true"></a>
-                    <a href="http://localhost/cmo-2/master-tenant/#/{{lt.id}}/0"class="glyphicon glyphicon-eye-open" aria-hidden="true" target="_blank"></a>
+                    <a href="#/{{currentBrokerID}}/{{currentUserID}}/linked-tenant-details/{{lt.id}}" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></a>
+                    <a href="#/{{currentBrokerID}}/{{currentUserID}}/linked-tenant-details/{{lt.id}}?edit" class="glyphicon glyphicon-pencil" aria-hidden="true"></a>
+                    <a href="http://localhost/cmo-2/linked-tenant/#/{{lt.id}}/0"class="glyphicon glyphicon-eye-open" aria-hidden="true" target="_blank"></a>
                     <a href="" class="glyphicon glyphicon-trash" aria-hidden="true" data-toggle="modal" data-target="#myModal" ng-click="setDeleteItem(mt)"></a>
 
                 </div>

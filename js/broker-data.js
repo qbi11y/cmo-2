@@ -13,29 +13,89 @@ app.factory('ListViews', function () {
     }
 })
 
-app.factory('Catalog', function() {
+app.factory('Catalog', ['$http', function($http) {
     var catalog;
+    var defaultCatalog = [];
+    var linkedTenantCatalog = [];
+    var serviceProviders = [];
 
     return {
+        setServiceProviders: function(data) {
+            if (!data) {
+                $http.get('../api/getServiceProviders.php').success(function(response) {        
+                    serviceProviders = response;
+                    return defaultCatalog
+                });
+            } else {
+                serviceProviders.push(data);
+            }
+        },
+        getServiceProviders: function() {
+            if (serviceProviders.length == 0) {
+                $http.get('../api/getServiceProviders.php').success(function(response) {        
+                    serviceProviders = response;
+                    console.log('defualt', defaultCatalog);
+                    return serviceProviders
+                });
+            } else {
+                return serviceProviders;
+            }
+        },
         getCatalog: function() {
             return catalog
         },
         setCatalog: function(data) {
             catalog = data
+        },
+        getDefaultCatalog: function() {
+            if (defaultCatalog.length == 0) {
+                console.log('default catalog empty');
+                $http.get('../api/getDefaultCatalog.php').success(function(response) {        
+                    defaultCatalog = response;
+                    console.log('defualt', defaultCatalog);
+                    return defaultCatalog
+                });
+            } else {
+                return defaultCatalog;
+            }
+        },
+        setDefaultCatalog: function(data) {            
+            if (!data) {
+                console.log('no data attribute');
+                $http.get('../api/getDefaultCatalog.php').success(function(response) {        
+                    defaultCatalog = response;
+                    return defaultCatalog
+                });
+            } else {
+                defaultCatalog = data;
+            }
+        },
+        getLinkedTenantCatalog: function() {
+            return linkedTenantCatalog
+        },
+        setLinkedTenantCatalog: function(data) {
+            linkedTenantCatalog = data;
         }
     }
-});
+}]);
 
-app.factory('MasterTenantDetails', function() {
-    var details = {};
+app.factory('TenantDetails', function() {
+    var masterTenantDetails = {};
+    var linkedTenantDetails = {};
 
     return {
         getMasterTenantDetails: function() {
             console.log('show details');
-            return details
+            return masterTenantDetails
         },
         setMasterTenantDetails: function(data) {
-            details = data
+            masterTenantDetails = data
+        },
+        getLinkedTenantDetails: function() {
+            return linkedTenantDetails
+        },
+        setLinkedTenantDetails: function(data) {
+            linkedTenantDetails = data
         }
     }
 });

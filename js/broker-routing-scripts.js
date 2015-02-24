@@ -57,4 +57,9 @@ app.config(['$routeProvider', function($routeProvider){
         templateUrl: 'add-user.html',
         controller: 'AdministrationController'
     })
+
+    .when('/:brokerID/:userID/linked-tenant-details/:linkedTenantID',  {
+        templateUrl: 'linked-tenant-details.html',
+        controller: 'LinkedTenantDetailsController'
+    })
 }]);

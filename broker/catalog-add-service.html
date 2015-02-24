@@ -22,7 +22,7 @@
                     <label for="provider">Which provider will host the service?</label>
                     <select class="form-control" ng-model="addServiceForm.providerID" ng-init="addServiceForm.providerID = -1">
                         <option selected value="-1">Select Provider</option>
-                        <option ng-repeat="provider in providers" value="{{provider.id}}">{{ provider.name }}</option>
+                        <option ng-repeat="provider in serviceProviders" value="{{provider.providerID}}">{{ provider.providerName }}</option>
                         <option value="0">Add New Provider</option>
                     </select>
                 </div>
@@ -36,7 +36,7 @@
 
                     <div class="form-group">
                         <label for="providerName">Provider URL</label>
-                        <input type="text" class="form-control" placeholder="Enter provider url" ng-model="addServiceForm.addProvider.providerName">
+                        <input type="text" class="form-control" placeholder="Enter provider url" ng-model="addServiceForm.addProvider.providerURL">
                     </div>
 
                     <div class="form-group">
@@ -144,7 +144,7 @@
 
                 <div class="form-group">
                     <label for="startingPrice">Starting Price</label>
-                    <input type="number" class="form-control" placeholder="Enter starting price" ng-model="addServiceForm.startingPrice">
+                    <input type="number" class="form-control" placeholder="Enter starting price" ng-model="addServiceForm.startingPrice" ng-init="addServiceForm.startingPrice = 0.00">
                 </div>
 
                 <div class="form-group">
@@ -190,7 +190,12 @@
                     <label for="startingPrice">Service Publisher</label>
                     <input type="text" class="form-control" placeholder="Enter service publisher" ng-model="addServiceForm.publisher">
                 </div>
-
+                
+                <div class="form-group">
+                    <label for="serviceIcon">Service Icon</label>
+                    <input type="url" class="form-control" placeholder="Enter url for service icon" ng-model="addServiceForm.serviceIcon">
+                </div>
+                
                 <div class="form-group">
                     <label for="serviceDescription">Default Access URL</label>
                     <input type="url" class="form-control" placeholder="Enter default access url" ng-model="addServiceForm.accessURL">
@@ -431,6 +436,16 @@
                         </div>
                     </div>
 
+                    <div class="form-group" ng-show="test.inputType == 'date'">
+                        <label>{{ test.label}}</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group" ng-show="test.inputType == 'textarea'">
                         <label>{{ test.label }}</label>
                         <textarea class="form-control"></textarea>
@@ -460,54 +475,54 @@
                 </div>
                 <div class="form-group">
                     <label>Form Field Label</label>
-                    <input type="text" class="form-control" ng-model="attribute.label">                    
+                    <input type="text" class="form-control" ng-model="addServiceForm.attribute.label">                    
                 </div>
                 <div class="form-group">
                     <label>What kind of input will this accept?</label>
                     <div class="radio">
                         <label for="date">
-                            <input type="radio" name="date" ng-model="attribute.inputType" value="type">Date</input>
+                            <input type="radio" name="date" ng-model="addServiceForm.attribute.inputType" value="date">Date</input>
                         </label>
                     </div>
 
                     <div class="radio">
                         <label for="startingPrice">
-                            <input type="radio" name="vdc" ng-model="attribute.inputType" value="text">Short Text (text field)</input>
+                            <input type="radio" name="vdc" ng-model="addServiceForm.attribute.inputType" value="text">Short Text (text field)</input>
                         </label>
                     </div>
 
                     <div class="radio">
                         <label for="startingPrice">
-                            <input type="radio" name="vdc" ng-model="attribute.inputType" value="textarea">Long Text (text area)</input>
+                            <input type="radio" name="vdc" ng-model="addServiceForm.attribute.inputType" value="textarea">Long Text (text area)</input>
                         </label>
                     </div>
 
                     <div class="radio">
                         <label for="startingPrice">
-                            <input type="radio" name="vdc" ng-model="attribute.inputType" value="select">Single Selection (drop down)</input>
+                            <input type="radio" name="vdc" ng-model="addServiceForm.attribute.inputType" value="select">Single Selection (drop down)</input>
                         </label>
                     </div>
 
-                    <div class="form-group" ng-show="attribute.inputType == 'select'">
+                    <div class="form-group" ng-show="addServiceFrom.attribute.inputType == 'select'">
                         <label>What are the select options? (Seperate with comma)</label>
-                        <input type="text" class="form-control" ng-model="attribute.selectOptions">
+                        <input type="text" class="form-control" ng-model="addServiceForm.attribute.selectOptions">
                     </div>
 
                     <div class="radio">
                         <label for="startingPrice">
-                            <input type="radio" name="vdc" ng-model="attribute.inputType" value="multiselect">Multiple Selection (multi-select dropdown)</input>
+                            <input type="radio" name="vdc" ng-model="addService.attribute.inputType" value="multiselect">Multiple Selection (multi-select dropdown)</input>
                         </label>
                     </div>
 
                     <div class="radio">
                         <label for="startingPrice">
-                            <input type="radio" name="vdc" ng-model="attribute.inputType" value="boolean">Yes No (enable, disable)</input>
+                            <input type="radio" name="vdc" ng-model="addService.attribute.inputType" value="boolean">Yes No (enable, disable)</input>
                         </label>
                     </div>
 
-                    <div class="form-group" ng-show="attribute.inputType == 'boolean'">
+                    <div class="form-group" ng-show="addService.attribute.inputType == 'boolean'">
                         <label>What question to ask the user?</label>
-                        <input type="text" class="form-control" ng-model="attribute.question">
+                        <input type="text" class="form-control" ng-model="addServiceForm.attribute.question">
                     </div>
                 </div>
 
@@ -515,23 +530,23 @@
                     <label>Is there a unit of measure?</label>
                     <div class="radio">
                         <label for="startingPrice">
-                            <input type="radio" name="uom" ng-model="attribute.hasUOM" value="yes">Yes</input>
+                            <input type="radio" name="uom" ng-model="addServiceForm.attribute.hasUOM" value="yes">Yes</input>
                         </label>
                     </div>
 
                     <div class="radio">
                         <label for="startingPrice">
-                            <input type="radio" name="uom" ng-model="attribute.hasUOM" value="no">No</input>
+                            <input type="radio" name="uom" ng-model="addServiceForm.attribute.hasUOM" value="no">No</input>
                         </label>
                     </div>
 
-                    <div class="form-group" ng-show="attribute.hasUOM == 'yes'">
+                    <div class="form-group" ng-show="addServiceForm.attribute.hasUOM == 'yes'">
                         <label>What is the unit of measure? (GB, per hour, etc)</label>
-                        <input type="text" class="form-control" ng-model="attribute.uom">
+                        <input type="text" class="form-control" ng-model="addServiceForm.attribute.uom">
                     </div>
 
                     <div class="form-group">
-                        <a href="" class="btn btn-primary btn-block" ng-click="createAttribute(attribute)">Done</a>
+                        <a href="" class="btn btn-primary btn-block" ng-click="createAttribute(addServiceForm.attribute)">Done</a>
                     </div>
                 </div>
 

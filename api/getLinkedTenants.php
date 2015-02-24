@@ -23,8 +23,7 @@ while ($row = mysql_fetch_array($mt_query)) {
     $mt->masterTenantID = $row['masterTenantID'];
     $mt->brokerID = $row['brokerID'];
     $mt->name = $row['name'];
-    $mt->tenants = $row['tenants'];
-    $mt->defaultCatalog = $row['defaultCatalog'];
+    $mt->linkedTenantID = $row['id'];    
     array_push($masterTenants, $mt);
 }
 

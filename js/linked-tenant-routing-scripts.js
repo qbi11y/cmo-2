@@ -47,6 +47,7 @@ app.config(['$routeProvider', function($routeProvider){
         templateUrl: 'add-user.html',
         controller: 'AdministrationController'
     })
+
 }]);
 
 

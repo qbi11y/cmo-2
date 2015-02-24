@@ -94,19 +94,40 @@ ctrl.controller('ServiceDetailsController', ['$scope', '$http', '$routeParams','
 
 ctrl.controller('StoreController', ['$scope', '$http', '$routeParams','$location', 'Catalog', 'Configure','Service', 'Users', 'Cart', function($scope, $http, $routeParams, $location, Catalog, Configure, Service, Users, Cart) {
     
-    $scope.theme = function() {
-        if ($location.path() == '/79/11/service-store') {
-           return true 
-        } else {
-            return false
-        }
-    }
     $scope.cartItems = Cart.getCart();
     $scope.providerFilter = [];
     $scope.currentUser = Users.getUser();
     $scope.currentLinkedTenantID = $routeParams.linkedTenantID;
     $scope.currentUserID = $routeParams.userID;
     $scope.compareItems = [];
+    $scope.catalog = [];
+
+    $http.get('../api/getLinkedTenantCatalog.php?id='+$scope.currentLinkedTenantID).success(function(serviceResponse) {
+        console.log('catalog', serviceResponse);
+        $http.get('../api/getDefaultCatalogProviders.php').success( function(providerResponse) {
+            console.log('providers', providerResponse);
+            $scope.mergeProviderAndCatalog(serviceResponse, providerResponse);
+        });
+    });
+
+    //take all of the services and apply the appropriate provider information
+    $scope.mergeProviderAndCatalog = function(services, providers ) {
+        for (var n=0; n < providers.length; n++) {
+            for (var i=0; i < services.length; i++) {
+                if (providers[n].providerID == services[i].providerID) {
+                    services[i].providerName = providers[n].providerName;
+                    services[i].providerIcon = providers[n].providerIcon;
+                }
+            }
+        }
+        $scope.catalog = services;
+    }
+
+    $scope.configureService = function(data) {
+        Configure.setConfigureItem(data);
+    };
+
+    /*
     $scope.setServiceDetails = function(data) {
         console.log(data);
         Service.setService(data);
@@ -195,17 +216,23 @@ ctrl.controller('StoreController', ['$scope', '$http', '$routeParams','$location
             }
         }    
     }
-
-    $scope.selectedView = 'grid';
     $scope.defaultCatalogProviders = [];
+    */
+    $scope.selectedView = 'grid';
+    
 }]);
 
 ctrl.controller('ConfigureServiceController', ['$scope', '$http', '$routeParams', 'Configure','Cart', function($scope, $http, $routeParams, Configure, Cart) {
     $scope.item = Configure.getConfigureItem();
     $scope.currentLinkedTenantID = $routeParams.linkedTenantID;
     $scope.currentUserID = $routeParams.userID;
-    console.log('linked tenant', $scope.currentLinkedTenantID);
     $scope.currentServiceID = $scope.item.id;
+    $scope.customAttributes = [];
+
+    $http.get('../api/getCustomAttributes.php?serviceID='+$scope.item.defaultServiceID).success(function(response) {
+        console.log('attributes ', response);
+        $scope.customAttributes = response;
+    })
 
     $scope.addToCart = function(data) {
         Cart.addItem(data);

@@ -12,9 +12,15 @@
     <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script><!-- Firebase -->
     <script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script><!-- AngularFire -->
     <script type="text/javascript" src="js/index.js"></script><!-- custom angular controllers -->
+    <script type="text/javascript" src="js/index-data.js"></script><!-- custom angular controllers -->
 
     <div class="container">
         <div id="brokerForm" ng-show="showBrokerForm">
+            <h3>Welcome to Gravitant</h3>
+            <p>In a few easy steps you will be up and running with your own cloudMatrix broker portal!</p>
+            <p>Your broker portal will include our default catalog which includes services from the following providers:</p>
+            <span ng-repeat="provider in providers"><img ng-src="{{provider.providerIcon}}" width="250px"></span>
+
             <form role="form">
                 <div class="form-group">
                     <label for="">Broker Name</label>
@@ -87,8 +93,14 @@
         <div id="brokerResponse" ng-show="!showBrokerForm">
             <p>{{ broker.brokerName }} was successfully added.</p>
             <p>{{ broker.firstName }} {{ broker.lastName }} was automatically associated with this broker account.</p> 
-            <p><a href="http://localhost/cmo-2/broker/#/{{user.brokerID}}/{{user.userID}}" target="blank">Visit {{ broker.brokerName }}'s admin portal</a></p>
-            <p><a href="http://localhost/cmo-2/broker/#/{{user.brokerID}}/{{user.userID}}" target="blank">http://localhost/cmo-2/broker/#/{{user.brokerID}}/{{user.userID}}</a></p>
+            <p><a href="http://localhost/cmo-2/broker/#/{{user.brokerID}}/{{user.userID}}" target="_blank">Visit {{ broker.brokerName }}'s admin portal<br>
+                <a href="http://localhost/cmo-2/broker/#/{{user.brokerID}}/{{user.userID}}" target="_blank">http://localhost/cmo-2/broker/#/{{user.brokerID}}/{{user.userID}}</a></p>
+
+            <p><a href="http://localhost/cmo-2/master-tenant/#/{{newMasterTenant.id}}/{{user.userID}}" target="_blank">Visit {{ newMasterTenant.name }}'s admin portal</a><br>
+                <a href="http://localhost/cmo-2/master-tenant/#/{{newMasterTenant.id}}/{{user.userID}}" target="_blank">http://localhost/cmo-2/master-tenant/#/{{newMasterTenant.id}}/{{user.userID}}</a></p>
+
+            <p><a href="http://localhost/cmo-2/linked-tenant/#/{{newLinkedTenant.id}}/{{user.userID}}" target="_blank">Visit {{ newLinkedTenant.name }}'s admin portal</a><br>
+                <a href="http://localhost/cmo-2/linked-tenant/#/{{newLinkedTenant.id}}/{{user.userID}}" target="_blank">http://localhost/cmo-2/linked-tenant/#/{{newLinkedTenant.id}}/{{user.userID}}</a></p>
         </div>
     </div> 
     
