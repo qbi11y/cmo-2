@@ -1,0 +1,30 @@
+<!-- master tenant list controller -->
+<div ng-include="'header.html'"></div>
+<h3>{{ currentLinkedTenant.name }} Details</h3>
+<div><a href="#/{{currentBrokerID}}/{{currentUserID}}/tenant-list">Back</a></div>
+<div>Link to Link Tenant: <a href="http://localhost/cmo-2/linked-tenant/#/{{currentLinkedTenantID}}/1" target="blank">http://localhost/cmo-2/linked-tenant/#/{{currentLinkedTenantID}}/1</a>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6 info-panel">Info</div>
+            <div class="col-md-6 info-panel">Info</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">sub info 1</div>
+    <div class="col-md-8">
+        <div class="list" ng-repeat="item in defaultCatalog">
+            <div><img ng-src="{{item.providerIcon}}"></div>
+            <div>{{item.serviceName}}</div>
+            <div>{{item.providerName}} {{item.visible}}</div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="serviceStore" ng-checked="item.visible" ng-click="updateCatalog(item, serviceStore)">Enabled in Service Store
+                </label>    
+            </div>
+        </div>
+        <a href="" class="btn btn-primary btn-block" ng-click="saveCatalog(updatedLinkedTenantCatalog)">Save Changes</a>
+    </div>
+</div>

@@ -1,0 +1,161 @@
+<!-- master tenant list controller -->
+<div ng-include="'header.html'"></div>
+<h3 class="page-heading">{{ service.name }} Service Details</h3>
+<div class="row">
+    <div class="col-md-2"><strong>Provider</strong></div>
+    <div class="col-md-4">{{ service.provider }}</div>
+    <div class="col-md-2"><strong>Task Type</strong></div>
+    <div class="col-md-4">{{ service.taskType }}</div>
+</div>
+
+<div class="row">
+    <div class="col-md-2"><strong>Customer Name</strong></div>
+    <div class="col-md-4">{{ service.customerName }}</div>
+    <div class="col-md-2"><strong>Customer ID</strong></div>
+    <div class="col-md-4">{{ service.customerID }}</div>
+</div>
+
+<div class="row">
+    
+    <div class="col-md-2"><strong><!--Created Date--></strong></div>
+    <div class="col-md-4"><!-- {{ service.createdDaste }} --></div>
+    <div class="col-md-2"><strong>Updated Date</strong></div>
+    <div class="col-md-4">{{ service.updatedDate }}</div>
+</div>
+
+<div class="row">
+    <div class="col-md-2"><strong>Task Description</strong></div>
+    <div class="col-md-4">{{ service.taskDescription }}</div>
+    <div class="col-md-2"><strong>Service Description</strong></div>
+    <div class="col-md-4">{{ service.serviceDescription }}</div>
+</div>
+
+<div class="row">
+    <div class="col-md-2"><strong>Service Start Date</strong></div>
+    <div class="col-md-4">{{ service.startDate }}</div>
+    <div class="col-md-2"><strong>Service End Date</strong></div>
+    <div class="col-md-4">{{ service.endDate }}</div>
+</div>
+
+<div class="row">
+    <div class="col-md-2"><strong>Parent Order ID</strong></div>
+    <div class="col-md-4">{{ service.parentOrderID }}</div>
+    <div class="col-md-2"><strong>Parent Order Name</strong></div>
+    <div class="col-md-4">{{ service.parentOrderName }}</div>
+</div>
+
+<div class="row">
+    <div class="col-md-2"><strong>Service Name as given by customer</strong></div>
+    <div class="col-md-4">{{ service.parentOrderID }}</div>
+    <div class="col-md-2"><strong>Service</strong></div>
+    <div class="col-md-4">{{ service.parentOrderName }}</div>
+</div>
+
+<div class="row">
+    <div class="col-md-2"><strong>Parent Order ID</strong></div>
+    <div class="col-md-4">{{ service.parentOrderID }}</div>
+    <div class="col-md-2"><strong>Parent Order Name</strong></div>
+    <div class="col-md-4">{{ service.parentOrderName }}</div>
+</div>
+
+<h3 class="page-heading">Chargeback</h3>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Application</label>
+            <select class="form-control">
+                <option>Select Application</option>
+                <option>Application 1</option>
+                <option>Application 2</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Environment</label>
+            <select class="form-control">
+                <option>Select Environment</option>
+                <option>Environment 1</option>
+                <option>Environment 2</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Layer</label>
+            <select class="form-control">
+                <option>Select Layer</option>
+                <option>Layer 1</option>
+                <option>Layer 2</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<h3 class="page-heading">Attributes</h3>
+<div class="row">
+    <div class="col-md-2"><strong>Cloud Service</strong></div>
+    <div class="col-md-4">{{ service.attributes.cloudService }}</div>
+    <div class="col-md-2"><strong>Cloud Service Name</strong></div>
+    <div class="col-md-4">{{ service.attributes.cloudServiceName }}</div>
+</div>
+
+<div class="row">
+    <div class="col-md-2"><strong>Storage</strong></div>
+    <div class="col-md-4">{{ service.attributes.storage }} {{ service.attributes.uom }}</div>
+    <div class="col-md-2"><strong>Service Start Date</strong></div>
+    <div class="col-md-4">{{ service.attributes.serviceStartDate }}</div>
+</div>
+
+<div class="row">
+    <div class="col-md-2"><strong>Service End Date</strong></div>
+    <div class="col-md-4">{{ service.attributes.serviceEndDate }}</div>
+</div>
+
+<h3 class="page-heading">Notes and Comments</h3>
+<div class="row">
+    <div class="col-md-6 form-group">
+        <label>Notes</label>
+        <textarea class="form-control"></textarea>
+    </div>
+    <div class="col-md-6 form-group">
+        <label>Comments</label>
+        <textarea class="form-control"></textarea>
+    </div>
+</div>
+
+<h3 class="page-heading">Line Items</h3>
+
+<div class="row" ng-repeat="item in service.lineItems">
+    <div class="col-md-2">
+        <div><h1 class="large-icon"><span class="glyphicon glyphicon-hdd" aria-hidden="true"></span></h1></div>
+        <div>{{ item.quantity }} {{ item.unit }}</div>
+        <div>{{ item.unitPrice | currency }}</div>
+        <div>{{ item.estimatedUsageCharge | currency }}</div>
+    </div>
+    <div class="col-md-8">
+        <div>
+            <label>Line Item</label>
+            <div>{{ item.lineItem }}</div>
+        </div>
+        <div>
+            <label>Resource /Service</label>
+            <div>{{ item.resource }}</div>
+        </div>
+        <div>MRC {{ item.mrc }}</div>
+        <div>NRC</div>
+        <div>Service Start Date</div>
+        <div>Service End Date</div>
+        <div>{{ item.pricingRules }}</div>
+    </div>
+
+    <div class="col-md-2">
+        <div>Edit</div>
+        <div>Delete</div>
+    </div>
+</div>
+
+
+
+
+

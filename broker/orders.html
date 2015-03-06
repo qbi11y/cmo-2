@@ -1,0 +1,244 @@
+<!-- Catalog Controller broker-controllers.js -->
+<div ng-include="'header.html'"></div>
+<h3><a href="#/{{currentBrokerID}}/{{currentUserID}}">Broker Portal</a> - Orders</h3>
+
+<div class="row well well-lg">
+    <div class="col-md-6">
+        <h2>Services Due Today<span ng-show="endDateRange != 0 "> - {{ endDateRange | date: 'EEE, MMM d' }}</span></h2>
+        <div class="jumbo-info-text">{{ servicesDue.length }} Total</div>
+        <div>
+            <select class="form-control" ng-change="updateDateRange(dateRange)" ng-model="dateRange" ng-init="dateRange = 1">
+                <option value="1">Due Today</option>
+                <option value="3">Due in 3 days</option>
+                <option  value="5">Due in 5 days</option>
+                <option  value="10">Due in 10 days</option>
+                <option  value="30">Due in 30 days</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>5 Awaiting Approval</div>
+        <div>3 Submitted to Broker</div>
+        <div>1 Failed</div>
+    </div>
+</div>
+<div class="row well well-lg">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <th>Order Name</th>
+            <th>Order ID</th>
+            <th>Status</th>  
+            <th>Customer Name</th>
+            <th>Submitted Date</th>
+            <th>Submitted By</th>
+            <th>Start Date</th>
+            <th>Actions</th>
+            <th></th>
+            <!--
+            <th>Order ID - Flyover</th>
+            <th>Order Amount - Flyover</th>
+            <th>Last Activity Date - Flyover</th>
+            <th>Affiliated - Flyover</th>
+            <th>Last Activity - Flyover</th>
+            -->
+            <tr ng-repeat="order in servicesDue" ng-mouseenter="showActions(order)" ng-mouseleave="showActions('blank')">
+                <td><a href="#/{{currentBrokerID}}/{{currentUserID}}/order-details/{{order.orderInfo.id}}" ng-click="showOrderDetails(order)">{{ order.orderInfo.name }}</a></td>
+                <td>{{ order.orderInfo.id }}</td>
+                <td>{{ order.orderInfo.status }}</td>
+                <td><a href="">{{ order.orderInfo.customerName }}</a></td>
+                <td>{{ order.orderInfo.submittedDate  | date : 'EEE, MMM d yyyy'}}</td>
+                <td>{{ order.orderInfo.submittedBy }}</td>
+                <td>{{ order.orderInfo.startDate | date : 'EEE, MMM d'}}</td>
+                <td><span ng-show="isHovered(order)"><span class="glyphicon glyphicon-cloud" aria-hidden="true"></span><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></span></td>
+                <td>
+                    <button ng-show="isHovered(order)" type="button" class="btn btn-default btn-xs" data-container="body" data-toggle="popover" title="Quick Info" data-placement="left" data-popover-content="#a1" data-max-width="1000px">
+                      Quick Info
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <div><a href="">1 failed 1 in progress</a></div>
+    </div>
+</div>
+
+<!--
+<div class="row">
+    <div class="col-md-6 info-panel">
+        <div>Total (12)</div>
+        <div class="col-md-6">Submitted (6)</div>
+        <div class="col-md-6">Submitted to Provider (6)</div>
+    </div>
+    
+    <div class="col-md-6 info-panel">Submitted for Approval (23)</div>
+
+
+</div>
+-->
+<h3 class="page-heading"> All Orders</h3>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search Orders" ng-model="searchText">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  Fiiter Orders
+</button>
+    </div>
+</div>
+<table class="table table-striped">
+    <th>Order Name</th>
+    <th>Order ID</th>
+    <th>Status</th>  
+    <th>Customer Name</th>
+    <th>Submitted Date</th>
+    <th>Submitted By</th>
+    <th>Start Date</th>
+    <th>Actions</th>
+    <th></th>
+    <!--
+    <th>Order ID - Flyover</th>
+    <th>Order Amount - Flyover</th>
+    <th>Last Activity Date - Flyover</th>
+    <th>Affiliated - Flyover</th>
+    <th>Last Activity - Flyover</th>
+    -->
+    <tr ng-repeat="order in orders" ng-mouseenter="showActions(order)" ng-mouseleave="showActions('blank')">
+        <td><a href="#/{{currentBrokerID}}/{{currentUserID}}/order-details/{{order.orderInfo.id}}" ng-click="showOrderDetails(order)">{{ order.orderInfo.name }}</a></td>
+        <td>{{ order.orderInfo.id }}</td>
+        <td>{{ order.orderInfo.status }}</td>
+        <td><a href="">{{ order.orderInfo.customerName }}</a></td>
+        <td>{{ order.orderInfo.submittedDate  | date : 'EEE, MMM d yyyy'}}</td>
+        <td>{{ order.orderInfo.submittedBy }}</td>
+        <td>{{ order.orderInfo.startDate | date : 'EEE, MMM d'}}</td>
+        <td><span ng-show="isHovered(order)"><span class="glyphicon glyphicon-cloud" aria-hidden="true"></span><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></span></td>
+        <td>
+            <button ng-show="isHovered(order)" type="button" class="btn btn-default btn-xs" data-container="body" data-toggle="popover" title="Quick Info" data-placement="left" data-popover-content="#a1" data-max-width="1000px">
+              Quick Info
+            </button>
+        </td>
+
+        <div class="hidden" id="a1">
+<div class="popover-heading">
+    This is the heading for #1
+</div>
+
+<div class="popover-body">
+    <div class="row">
+        <div class="col-md-6">Order Amount</div>
+        <div class="col-md-6">$198.90</div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Last Activity</div>
+        <div class="col-md-6">Fri. Mar. 1</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">Affiliate</div>
+        <div class="col-md-6">ACME</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">Type</div>
+        <div class="col-md-6">VDC</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">Provider</div>
+        <div class="col-md-6">Amazon</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12"><a href="#/{{currentBrokerID}}/{{currentUserID}}/order-details/{{orderID}}" onclick="closePopOver()">View Details</a></div>
+    </div>
+</div>
+</div>
+    </tr>
+</table>
+
+Customizable Columns would be valuable because certain people care about certain things<br>
+Sortable columns, multi column sort<br>
+Want to take action, how to filter to get to those real quick, date range, submitted date, status<br>
+Summary of order type count
+
+Order ID - xxx-xxx-xx-xx-xxxx
+Order Amount - $198.00
+Last Activity Date - Fri. Mar. 1
+Affiliated - ACME
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Filter Orders</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Date Range</label>
+                    <div class="row">
+                    <div class="col-md-6">
+                        <input type="text"  class="form-control" placeholder="Enter Filter Start Date">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text"  class="form-control" placeholder="Enter Filter End Date">
+                    </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Affiliate</label>
+                    <select multiple class="form-control">
+                        <option>Affiliate 1</option>
+                        <option>Affiilate 2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Submitted By</label>
+                    <select multiple class="form-control">
+                        <option>Name 1</option>
+                        <option>Name 2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Customer</label>
+                    <select multiple class="form-control">
+                        <option>Customer 1</option>
+                        <option>Customer 2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select multiple class="form-control">
+                        <option>Status 1</option>
+                        <option>Status 2</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Filter Orders</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+1. Check Status 2. FulFillment 3. Get Stats 4. Trigger Fulfillment
+Only can work with Submtitted to Provider. Things that are due today, things that are 3 days out.
+
+Keys to fulfillment success - honor the start date, show me orders created today and show which ones start in march, april etc. helps with planning. Date Ranges are key. When do these services need to start? Status view - created state, approval state, submitted to provider.
+
+Quick info - order history based on approval - Filters should populate the search field
+

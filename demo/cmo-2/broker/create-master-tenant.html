@@ -1,0 +1,37 @@
+<!-- MasterTenantController broker-controllers.js -->
+test {{ masterTenantForm }}
+<form role="form">
+    <div class="form-group">
+        <label for="mt-accessCode">Access Code</label>
+        <input type="text" class="form-control" id="mt-accessCode" placeholder="Enter access code" ng-model="masterTenantForm.accessCode">
+    </div>
+
+    <div class="form-group">
+        <label for="mt-name">Account Name</label>
+        <input type="text" class="form-control" id="mt-name" placeholder="Enter account name" ng-model="masterTenantForm.accountName">
+    </div>
+
+    <div class="form-group">
+        <label for="mt-max-tenants">Max Tenants</label>
+        <input type="number" class="form-control" id="mt-max-tenants" placeholder="Enter number of max tenants" ng-model="masterTenantForm.maxTenants">
+    </div>
+
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="masterTenantForm.defaultCatalog" ng-init="masterTenantForm.defaultCatalog = false"> Include default catalog
+        </label>
+    </div>
+
+    {{ masterTenantForm }}
+    <div class="form-group">
+        <a href="#/{{currentBrokerID}}/{{currentUserID}}/create-master-tenant-summary" class="btn btn-primary btn-block" ng-click="setNewMasterTenant()">Next</a>
+    </div>
+
+    <div class="form-group">
+        <a href="#{{currentBrokerID}}/{{currentUserID}}/catalog" class="btn btn-primary btn-block">Cancel</a>
+    </div>
+
+    <div class="form-group">
+        <input type="hidden" ng-model="masterTenantForm.brokerID" ng-init="masterTenantForm.brokerID = currentBrokerID">
+    </div>
+</form>

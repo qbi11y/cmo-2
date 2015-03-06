@@ -1,0 +1,123 @@
+$text-gray: rgba(125, 125, 125, 1);
+$border-bottom: rgba(0, 122, 200, .3);
+
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.theme-phone-disabled, .theme-inactive {
+    display: none;
+}
+
+.theme-active, .theme-phone-active {
+    display: block;
+}
+
+/*styles for the list/grid views*/
+.theme-list {
+    border-bottom: 1px dotted $border-bottom;
+    border-top: 2px solid white;
+    vertical-align: top;
+    position: relative;
+    padding: 4em 0;
+}
+
+.theme-text-list {
+    border-bottom: 1px dotted $border-bottom;
+    padding: 1.2em 0;
+}
+
+.theme-text-list-key {
+    font-weight: bold;
+}
+
+.theme-text-list-value {
+    color: $text-gray
+}
+
+.theme-list-header {
+    font-size: 1.5em;
+}
+
+.theme-list img {
+    max-width: 200px;
+}
+
+.theme-list-logo {
+    min-height: 6em;
+    float: right;
+}
+
+.theme-list-text {
+    min-height: 5em;
+    color: $text-gray;
+}
+
+/* end styles for list/grid view */
+
+.theme-compare-item {
+    width: 100px;
+    display: inline-block;
+}
+
+.theme-compare-item img {
+    width: 100px;
+}
+
+.theme-right {
+    float: right;
+}
+
+.themeBrand:after {
+    content: url("../../img/wk3.png");
+}
+
+
+@media screen and (min-width: 480px) {
+    .theme-phone-active {
+        display: none;
+    }
+    .theme-phone-disabled {
+    display: block;
+}
+    .theme-grid {
+        display: inline-block;
+        width: 47%;
+        margin-right: 1.5em;
+        min-height: 300px;
+        margin-bottom: 3em;
+    }
+    .theme-item-overlay {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 786px) {
+    .theme-phone-active {
+        display: none;
+    }
+    .theme-hover {
+    border-top: 2px solid red;
+    }
+    .theme-phone-disabled {
+    display: block;
+    }
+    .theme-grid {
+        display: inline-block;
+        width: 31%;
+        margin-right: 1.5em;
+        min-height: 300px;
+        margin-bottom: 3em;
+    }
+    .theme-item-overlay {
+        display: none;
+        position: absolute;
+        top: 0;
+        background-color: rgba(200, 200, 200, .95);
+        width: 100%;
+        min-height: 300px;
+        padding: 2em;
+    }
+}

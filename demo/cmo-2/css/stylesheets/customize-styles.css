@@ -1,0 +1,148 @@
+/* line 4, ../sass/customize-styles.scss */
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+/* line 10, ../sass/customize-styles.scss */
+.theme-phone-disabled, .theme-inactive {
+  display: none;
+}
+
+/* line 14, ../sass/customize-styles.scss */
+.theme-active, .theme-phone-active {
+  display: block;
+}
+
+/*styles for the list/grid views*/
+/* line 19, ../sass/customize-styles.scss */
+.theme-list {
+  border-bottom: 1px dotted rgba(0, 122, 200, 0.3);
+  border-top: 2px solid white;
+  vertical-align: top;
+  position: relative;
+  padding: 4em 0;
+}
+
+/* line 27, ../sass/customize-styles.scss */
+.theme-text-list {
+  border-bottom: 1px dotted rgba(0, 122, 200, 0.3);
+  padding: 1.2em 0;
+}
+
+/* line 32, ../sass/customize-styles.scss */
+.theme-text-list-key {
+  font-weight: bold;
+}
+
+/* line 36, ../sass/customize-styles.scss */
+.theme-text-list-value {
+  color: #7d7d7d;
+}
+
+/* line 40, ../sass/customize-styles.scss */
+.theme-list-header {
+  font-size: 1.5em;
+}
+
+/* line 44, ../sass/customize-styles.scss */
+.theme-list img {
+  max-width: 200px;
+}
+
+/* line 48, ../sass/customize-styles.scss */
+.theme-list-logo {
+  min-height: 6em;
+  float: right;
+}
+
+/* line 53, ../sass/customize-styles.scss */
+.theme-list-text {
+  min-height: 5em;
+  color: #7d7d7d;
+}
+
+/* end styles for list/grid view */
+/* line 60, ../sass/customize-styles.scss */
+.theme-compare-item {
+  width: 100px;
+  display: inline-block;
+}
+
+/* line 65, ../sass/customize-styles.scss */
+.theme-compare-item img {
+  width: 100px;
+}
+
+/* line 69, ../sass/customize-styles.scss */
+.theme-right {
+  float: right;
+}
+
+/* line 73, ../sass/customize-styles.scss */
+.themeBrand:after {
+  content: url("../../img/wk3.png");
+}
+
+@media screen and (min-width: 480px) {
+  /* line 79, ../sass/customize-styles.scss */
+  .theme-phone-active {
+    display: none;
+  }
+
+  /* line 82, ../sass/customize-styles.scss */
+  .theme-phone-disabled {
+    display: block;
+  }
+
+  /* line 85, ../sass/customize-styles.scss */
+  .theme-grid {
+    display: inline-block;
+    width: 47%;
+    margin-right: 1.5em;
+    min-height: 300px;
+    margin-bottom: 3em;
+  }
+
+  /* line 92, ../sass/customize-styles.scss */
+  .theme-item-overlay {
+    display: none;
+  }
+}
+@media screen and (min-width: 786px) {
+  /* line 98, ../sass/customize-styles.scss */
+  .theme-phone-active {
+    display: none;
+  }
+
+  /* line 101, ../sass/customize-styles.scss */
+  .theme-hover {
+    border-top: 2px solid red;
+  }
+
+  /* line 104, ../sass/customize-styles.scss */
+  .theme-phone-disabled {
+    display: block;
+  }
+
+  /* line 107, ../sass/customize-styles.scss */
+  .theme-grid {
+    display: inline-block;
+    width: 31%;
+    margin-right: 1.5em;
+    min-height: 300px;
+    margin-bottom: 3em;
+  }
+
+  /* line 114, ../sass/customize-styles.scss */
+  .theme-item-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    background-color: rgba(200, 200, 200, 0.95);
+    width: 100%;
+    min-height: 300px;
+    padding: 2em;
+  }
+}

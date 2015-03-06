@@ -1,0 +1,30 @@
+<!-- MasterTenantController broker-controllers.js -->
+<h3>Broker Portal - Add Service to Default Catalog - Summary</h3>
+{{newServiceData}}
+<form role="form">
+    <div class="form-group">
+        <label for="provider">Provider</label>
+        {{ newServiceData.provider }}
+    </div>
+
+    <div class="form-group">
+        <label for="serviceName">Service Name</label>
+        {{ newServiceData.serviceName }}
+    </div>
+
+    <div class="form-group">
+        <label for="startingPrice">Starting Price</label>
+        {{ newServiceData.startingPrice }}
+    </div>
+
+    <div class="form-group">
+        <label for="serviceDescription">Service Description</label>
+        {{ newServiceData.serviceDescription }}
+    </div>
+
+
+    {{ addServiceForm }}
+    <div class="form-group">
+        <a href="#/{{currentBrokerID}}/{{currentUserID}}/catalog" class="btn btn-primary btn-block" ng-click="createNewDefaultCatalogService(newServiceData)">Save and Create Service</a>
+    </div>
+</form>

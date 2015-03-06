@@ -1,0 +1,225 @@
+<!-- master tenant list controller -->
+<div ng-include="'header.html'"></div>
+<div class="alert alert-warning" role="alert">Prereqs required to fulfill this service <a href="#" class="alert-link">View Details</a></div>
+<div class="row">
+    <div class="col-md-6" id="page-header">
+        <h1>{{order.orderInfo.name}} Summary</h1>
+        <h3>60% Complete</h3>
+        <div>Submitted: 11:08 AM | Thursday, March 14</div>
+    </div>
+    <div class="col-md-6 text-right">
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown" aria-expanded="false">
+            Broker Actions <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Download BOM</a></li>
+            <li><a href="#">View Terms and Conditions</a></li>
+            <li><a href="#">Start Fulfilment Process</a></li>
+            <li><a href="#">Mark as Complete</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Cancel Order</a></li>
+          </ul>
+        </div>        
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 info-panel text-center">
+        <h4>Automated Provisioning Services</h4>
+        <div class="jumbo-info-text">3 of 5</div>
+        <div><a href="">1 failed 1 in progress</a></div>
+    </div>
+    <div class="col-md-4 info-panel text-center">
+        <h4>External Provisioning Services</h4>
+        <div class="jumbo-info-text">5 of 7</div>
+        <div><a href="">1 failed 1 in progress</a></div>
+    </div>
+    <div class="col-md-4 info-panel text-center">
+        <h4>Manual Fulfillment Services</h4>
+        <div class="jumbo-info-text">2 of 3</div>
+    </div>
+</div>
+<!--
+<div class="row">
+    <div class="col-md-12"><div class="form-group">
+            <label>Order Progress</label>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                    60%
+                </div>
+            </div>
+        </div></div>
+</div>-->
+<h3 class="page-heading">Details</h3>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Order Owner</label>
+            <select class="form-control">
+                <option>Owner 1</option>
+                <option>Owner 2</option>
+            </select>
+        </div>
+        <!-- Single button -->
+        
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">Customer Info</div>
+            <div class="col-md-6">ACME - xxx-xxx-xxx-xxx</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">Contact Name</div>
+            <div class="col-md-6"><a href="">John Doe</a></div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">Contact Phone</div>
+            <div class="col-md-6"><a href="" type="phone">512 - 555 - 1212</a></div>
+        </div>
+    </div>
+</div>
+
+<h3 class="page-heading">Services</h3>
+<h4>VDC</h4>
+<div class="row">
+    <div class="col-md-3">My Amazon VDC</div>
+    <div class="col-md-3">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+            60%
+          </div>
+        </div>
+    </div>
+    <div class="col-md-3">$500.00</div>
+    <div class="col-md-3">
+        <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" title="Quick Info" data-placement="left" data-popover-content="#a1">
+          Quick Info
+        </button>
+    </div>
+</div>
+    
+
+
+<h4>
+    <span class="glyphicon glyphicon-minus collapse-icon" aria-hidden="true" ng-click="hideDetails('cm')" ng-show="showCM"></span>
+    <span class="glyphicon glyphicon-plus expand-icon" aria-hidden="true" ng-click="showDetails('cm')" ng-show="!showCM"></span> cM Automated Provisioning Services (5)</h4>
+<div class="well well-lg" ng-show="showCM">
+    <div class="row" ng-repeat="aService in order.services.automated">
+        <div class="col-md-3"><a href="#/{{currentBrokerID}}/{{currentUserID}}/service-details/{{serviceID}}" ng-click="showServiceDetails(aService)">{{ aService.name }}</a></div>
+        <div class="col-md-3">
+            <div class="progress">
+
+                <!-- Progress Complete -->
+              <div ng-show="aService.progress == 100" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{aService.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{aService.progress}}%;">
+                {{ aService.progress }}% Complete
+              </div>
+                
+            <!-- In Progress -->
+              <div ng-show="aService.progress < 100" class="progress-bar" role="progressbar" aria-valuenow="{{aService.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{aService.progress}}%;">
+                {{ aService.progress }}% Complete
+              </div>
+            </div>
+        </div>
+        <div class="col-md-3">{{ aService.cost | currency }}</div>
+        <div class="col-md-3">More Info</div>
+    </div>
+</div>
+
+<h4>
+    <span class="glyphicon glyphicon-minus collapse-icon" aria-hidden="true" ng-click="hideDetails('external')" ng-show="showExternal"></span>
+    <span class="glyphicon glyphicon-plus expand-icon" aria-hidden="true" ng-click="showDetails('external')" ng-show="!showExternal"></span>
+    External Provisioning Services (7)</h4>
+<div class="well well-lg" ng-show="showExternal">
+    <div class="row" ng-repeat="eService in order.services.external" >
+        <div class="col-md-3"><a href="#/{{currentBrokerID}}/{{currentUserID}}/service-details/{{serviceID}}" ng-click="showServiceDetails(eService)">{{ eService.name }}</a></div>
+        <div class="col-md-3">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                60%
+              </div>
+            </div>
+        </div>
+        <div class="col-md-3">{{ eService.cost }}</div>
+        <div class="col-md-3">More Info</div>
+    </div>
+</div>
+
+<h4>
+    <span class="glyphicon glyphicon-minus collapse-icon" aria-hidden="true" ng-click="hideDetails('manual')" ng-show="showManual"></span>
+    <span class="glyphicon glyphicon-plus expand-icon" aria-hidden="true" ng-click="showDetails('manual')" ng-show="!showManual"></span>
+    Manual Fulfillment Services (3)</h4>
+<div class="well well-lg" ng-show="showManual">
+    <div class="row" ng-repeat="mService in order.services.manual">
+        <div class="col-md-3"><a href="#/{{currentBrokerID}}/{{currentUserID}}/service-details/{{serviceID}}" ng-click="showServiceDetails(mService)">{{ mService.name }}</div>
+        <div class="col-md-3">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                60%
+              </div>
+            </div>
+        </div>
+        <div class="col-md-3">{{ mService.cost }}</div>
+        <div class="col-md-3">More Info</div>
+    </div>
+</div>
+
+
+<div class="hidden" id="a1">
+<div class="popover-heading">
+    This is the heading for #1
+</div>
+
+<div class="popover-body">
+    <div class="row">
+        <div class="col-md-6">Order ID</div>
+        <div class="col-md-6">xx-xxx-xx-xxx</div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Order Amount</div>
+        <div class="col-md-6">$198.90</div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Last Activity</div>
+        <div class="col-md-6">Fri. Mar. 1</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">Affiliate</div>
+        <div class="col-md-6">ACME</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12"><a href="#/{{currentBrokerID}}/{{currentUserID}}/order-details/{{orderID}}" onclick="closePopOver()">View Details</a></div>
+    </div>
+</div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br>
+<ul>
+    <li>Show services associated with the order</li>
+    <li>Prerequisites for fullfilment</li>
+    <li>Show progress of each service fulfillment</li>
+    <li>End User notification of fullfilment completion</li>
+    <li>Ensure correct fullfilment order is followed</li>
+    <li>Trigger correct fullfilment engine for each service</li>
+    <li>Ensure fullfilment is associated with correct chargeback account</li>
+    <li>Due dates for fulfillment - future</li>
+    <li>Who is assigned to the fulfillment???</li>
+</ul>
+
+<h3>Order Level</h3>
+Summary, VDC Service, CM Automated Provisioning, External Provisioning, Manual Fulfillment<br>
+Have provider sub accounts been created? - Make sure provider accounts have been setup and associated with the service before triggering fulfillment<br>
+Ensure that VDC has been setup prior to initiating fulfillment of remaining services, only shows if VDC in order. Only one VDC per order.
+Have all prereqs been completed?<br>
+cM Automated Services -  are all provisioned at once.<br>
+Manual fulfillment needs to be input back into the system once complete.
+Clear messaging<br><br>
+
+Actions: Cancel Order, Mark As Complete, Add/Track Comments, View Terms and Conditions
+Fields to Add: Contact Name, Email, Phone, Status, ID, Name, Submitted Date, Customer Name, Customer ID, Start and End Date, View Order History, Download BOM
+
+
+
